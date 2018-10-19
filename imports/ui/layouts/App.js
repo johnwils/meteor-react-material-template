@@ -12,8 +12,8 @@ import Navbar from '../components/Navbar';
 
 // import routes
 import Landing from '../pages/Landing';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
 import Profile from '../pages/Profile';
 import NotFound from '../pages/Not-Found';
 import RecoverPassword from '../pages/RecoverPassword';
@@ -32,8 +32,8 @@ const App = props => (
       {props.loggingIn && <Spinner />}
       <Switch>
         <PropsRoute exact path="/" component={Landing} {...props} />
-        <PropsRoute path="/login" component={Login} {...props} />
-        <PropsRoute path="/signup" component={Signup} {...props} />
+        <PropsRoute path="/signin" component={SignIn} {...props} />
+        <PropsRoute path="/signup" component={SignUp} {...props} />
         <PropsRoute exact path="/profile" component={Profile} {...props} />
         <PropsRoute exact path="/profile/:_id" component={Profile} {...props} />
         <PropsRoute

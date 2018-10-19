@@ -22,5 +22,11 @@ allowImageOrigin.forEach(o => BrowserPolicy.content.allowImageOrigin(o));
 /**
  * allowed styles
  */
-// const allowStyleOrigin = [''];
-// allowStyleOrigin.forEach(o => BrowserPolicy.content.allowStyleOrigin(o));
+const allowStyleOrigin = ['fonts.googleapis.com'];
+allowStyleOrigin.forEach(o => BrowserPolicy.content.allowStyleOrigin(o));
+
+/**
+ * allowed fonts
+ */
+const allowFontOrigin = ['fonts.gstatic.com'];
+allowFontOrigin.forEach(o => BrowserPolicy.content.allowFontOrigin(o));

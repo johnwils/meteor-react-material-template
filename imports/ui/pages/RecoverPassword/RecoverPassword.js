@@ -1,11 +1,91 @@
+import { Accounts } from 'meteor/accounts-base';
 import React from 'react';
+import PropTypes from 'prop-types';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
 
-import './RecoverPassword.scss';
+// components
+import showAlert from '../../components/Alert';
 
-const RecoverPassword = () => (
-  <div className="recover-password-page">
-    <h1>Recover Password Page</h1>
-  </div>
-);
+const styles = theme => ({
+  form: {
+    height: '300px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  formControl: {
+    marginTop: '48px',
+    width: '240px',
+  },
+});
 
-export default RecoverPassword;
+class RecoverPassword extends React.Component {
+  state = {
+    sending: false,
+    email: '',
+  };
+
+  sendPasswordReset = () => {
+    const { email } = this.state;
+    if (!email.length) {
+      return showAlert({
+        title: 'Recover Password Error',
+        message: 'Email required',
+      });
+    }
+    this.setState({ sending: true });
+    Accounts.forgotPassword({ email }, err => {
+      this.setState({ sending: false, email: '' });
+      if (err) {
+        return showAlert({
+          title: 'Recover Password Error',
+          message: err.reason,
+        });
+      }
+      showAlert({
+        title: 'Email Sent',
+        message: 'Check your email to reset your password',
+      });
+    });
+  };
+  render() {
+    const { classes } = this.props;
+    const { email } = this.state;
+    return (
+      <form className={classes.form} onSubmit={this.handleSubmit}>
+        <Grid container direction="column" justify="center" alignItems="center">
+          <Typography variant="h5">Recover Password</Typography>
+          <FormControl className={classes.formControl} margin="normal" required>
+            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <Input
+              id="email"
+              name="email"
+              autoFocus
+              value={email}
+              onChange={e => this.setState({ email: e.target.value })}
+            />
+          </FormControl>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.sendPasswordReset}
+          >
+            Send Password Reset Email
+          </Button>
+        </Grid>
+      </form>
+    );
+  }
+}
+
+RecoverPassword.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(RecoverPassword);

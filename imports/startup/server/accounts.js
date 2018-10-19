@@ -13,3 +13,9 @@ Accounts.onCreateUser((options, user) => {
   });
   return user;
 });
+
+// remove # from password reset / enroll urls
+Accounts.urls.resetPassword = token =>
+  Meteor.absoluteUrl(`reset-password/${token}`);
+Accounts.urls.enrollAccount = token =>
+  Meteor.absoluteUrl(`enroll-account/${token}`);

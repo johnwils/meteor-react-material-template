@@ -20,7 +20,7 @@ const mixins = [LoggedInMixin, MethodHooks, CallPromiseMixin];
 const checkLoggedInError = {
   error: 'notLogged',
   message: 'You need to be logged in to call this method',
-  reason: 'You need to login',
+  reason: 'You need to signin',
 };
 
 /** **************** Methods **************** */

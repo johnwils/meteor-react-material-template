@@ -1,5 +1,10 @@
-// variable overides
-@import "./custom.scss";
 
-// Bootstrap and its default variables
-@import "{}/node_modules/bootstrap/scss/bootstrap.scss";
+// custom global scss
+@import './custom.scss';
+
+//fonts
+@import './fonts/roboto.scss';
+
+body {
+  font-family: 'Roboto', sans-serif;
+}

@@ -1,41 +1,77 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+// components
+import Modal from '../../components/Modal/Modal';
+
+// methods
+import { countersIncrease } from '../../../api/counters/methods';
 
 // collection
 import Counters from '../../../api/counters/counters';
 
-// remote example (if using ddp)
-/*
-import Remote from '../../../api/remote/ddp';
-import Users from '../../../api/remote/users';
-*/
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+});
 
 // components
-import Modal, { Button } from '../../components/Modal/Modal';
-import AddCountButton from '../../components/Button';
 import Text from '../../components/Text';
 
 import './Profile.scss';
 
 class Profile extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     if (!this.props.loggedIn) {
-      return this.props.history.push('/login');
+      return this.props.history.push('/signin');
     }
   }
 
   shouldComponentUpdate(nextProps) {
     if (!nextProps.loggedIn) {
-      nextProps.history.push('/login');
+      nextProps.history.push('/signin');
       return false;
     }
     return true;
   }
 
+  renderUserModal = () => {
+    const Body = () => (
+      <>
+        <Typography variant="body1">Meteor.userId():</Typography>
+        <code>{Meteor.userId()}</code>
+        <br />
+        <br />
+        <Typography variant="body1">Meteor.user():</Typography>
+        <code>
+          <pre>{JSON.stringify(Meteor.user(), null, 2)}</pre>
+        </code>
+        <Typography variant="body1">Counter:</Typography>
+        <code>
+          <pre>{JSON.stringify(this.props.counter, null, 2)}</pre>
+        </code>
+      </>
+    );
+    ReactDOM.render(
+      <Modal title="User info" body={<Body />} subtitle="subtitleeee" />,
+      document.createElement('div')
+    );
+  };
+
   render() {
     const {
+      classes,
       loggedIn,
       // remote example (if using ddp)
       // usersReady,
@@ -56,18 +92,24 @@ class Profile extends React.Component {
     return (
       <div className="profile-page">
         <h1>Profile Page</h1>
-        <Button target="userId" type="primary" title="Click for User Info" />
-        {countersReady && (
-          <Modal
-            target="userId"
-            title="User Info"
-            body={Meteor.userId()}
-            counter={counter}
-          />
-        )}
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.renderUserModal}
+        >
+          Click for User Info
+        </Button>
         <hr />
         {countersReady && <Text count={counter.count} />}
-        <AddCountButton />
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={() => countersIncrease.call({ _id: Meteor.userId() })}
+        >
+          Click Me
+        </Button>
       </div>
     );
   }
@@ -79,6 +121,7 @@ Profile.defaultProps = {
 };
 
 Profile.propTypes = {
+  classes: PropTypes.object.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -95,7 +138,7 @@ Profile.propTypes = {
     : () => null,
 };
 
-export default withTracker(() => {
+const profile = withTracker(() => {
   // remote example (if using ddp)
   /*
   const usersSub = Remote.subscribe('users.friends'); // publication needs to be set on remote server
@@ -115,3 +158,5 @@ export default withTracker(() => {
     counter,
   };
 })(Profile);
+
+export default withStyles(styles)(profile);

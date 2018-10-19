@@ -1,107 +1,153 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
-import './Navbar.scss';
-
-const PublicNav = () => [
-  <li key="login" className="nav-item">
-    <span className="nav-link">
-      <NavLink to="/login">Login</NavLink>
-    </span>
-  </li>,
-  <li key="signup" className="nav-item">
-    <span className="nav-link">
-      <NavLink to="/signup">Signup</NavLink>
-    </span>
-  </li>,
-];
-
-const SearchBar = () => (
-  <form className="form-inline">
-    <input
-      className="form-control mr-sm-2"
-      type="search"
-      placeholder="Search.."
-      aria-label="Search"
-    />
-    <button className="btn btn-secondary my-2 my-sm-0" type="button">
-      <i className="fa fa-search" />
-    </button>
-  </form>
-);
-
-const LoggedInNav = () => [
-  <SearchBar key="searchbar" />,
-  <li key="dropdown" className="nav-item dropdown ml-4">
-    <span
-      className="nav-link dropdown-toggle"
-      id="navbarDropdownMenuLink"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    />
-    <div
-      className="dropdown-menu dropdown-menu-right"
-      aria-labelledby="navbarDropdownMenuLink"
-    >
-      <NavLink to="/profile">
-        <button className="dropdown-item">Profile</button>
-      </NavLink>
-      <div className="dropdown-divider" />
-      <NavLink to="/login" onClick={() => Meteor.logout()}>
-        <button className="dropdown-item">Logout</button>
-      </NavLink>
-    </div>
-  </li>,
-];
-
-const Status = ({ loggedIn }) => (
-  <div className="my-2 mr-3">
-    {loggedIn ? (
-      <span className="text-success">
-        <i className="fa fa-circle" />
-      </span>
-    ) : (
-      <span className="text-secondary">
-        <i className="fa fa-circle" />
-      </span>
-    )}
-  </div>
-);
-
-Status.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
 };
 
-const Navbar = ({ loggedIn }) => (
-  <nav className="navbar navbar-expand-md justify-content-between py-0">
-    <Status loggedIn={loggedIn} />
-    <span className="navbar-brand my-2">
-      <NavLink to="/">Brand</NavLink>
-    </span>
-    <button
-      className="navbar-toggler my-2"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarContent"
-      aria-controls="navbarContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon" />
-    </button>
-    <div className="collapse navbar-collapse" id="navbarContent">
-      <ul className="navbar-nav ml-auto">
-        {loggedIn ? <LoggedInNav /> : <PublicNav />}
-      </ul>
-    </div>
-  </nav>
-);
+class NavBar extends React.Component {
+  state = {
+    auth: true,
+    anchorEl: null,
+  };
 
-Navbar.propTypes = {
+  handleChange = event => {
+    this.setState({ auth: event.target.checked });
+  };
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  render() {
+    const { classes, loggedIn: auth } = this.props;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            {/* <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <MenuIcon />
+            </IconButton> */}
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              <Button
+                color="inherit"
+                onClick={() => this.props.history.push('/')}
+              >
+                tNt
+              </Button>
+            </Typography>
+            {auth ? (
+              <div>
+                <IconButton
+                  aria-owns={open ? 'menu-appbar' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem
+                    onClick={() => {
+                      this.props.history.push('/profile');
+                      this.handleClose();
+                    }}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      this.props.history.push('/');
+                      this.handleClose();
+                    }}
+                  >
+                    Landing
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      Meteor.logout();
+                      this.props.history.push('/signin');
+                      this.handleClose();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <div>
+                <Button
+                  color="inherit"
+                  onClick={() => this.props.history.push('signup')}
+                >
+                  Signup
+                </Button>
+                <Button
+                  color="inherit"
+                  onClick={() => this.props.history.push('signin')}
+                >
+                  Signin
+                </Button>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
+
+NavBar.propTypes = {
+  classes: PropTypes.object.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default Navbar;
+export default withStyles(styles)(NavBar);

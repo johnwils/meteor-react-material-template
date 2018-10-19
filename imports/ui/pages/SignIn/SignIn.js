@@ -1,4 +1,4 @@
-import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
@@ -62,20 +62,25 @@ const styles = theme => ({
   },
 });
 
-class SignUp extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
-      errMsg: '',
+      checkbox: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.loggedIn) {
-      return this.props.history.push('/profile');
+    const { loggedIn, history } = this.props;
+    if (loggedIn) {
+      return history.push('/profile');
+    }
+
+    if (localStorage.getItem('checkbox') === 'true') {
+      this.setState({ checkbox: true, email: localStorage.getItem('email') });
     }
   }
 
@@ -90,13 +95,14 @@ class SignUp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { email, password } = this.state;
-    Accounts.createUser({ email, password }, err => {
+    Meteor.loginWithPassword(email, password, err => {
       if (err) {
-        showAlert({ title: 'Sign Up Error', message: err.reason });
+        showAlert({ title: 'Sign in Error', message: err.reason });
         return console.log(err);
       }
     });
   }
+
   render() {
     const { classes, loggedIn } = this.props;
     const { email, password, checkbox } = this.state;
@@ -110,7 +116,7 @@ class SignUp extends React.Component {
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Avatar alt="logo" className={classes.avatar} src="/img/logo.png" />
-            <Typography variant="h5">Sign up</Typography>
+            <Typography variant="h5">Sign in</Typography>
             <form className={classes.form} onSubmit={this.handleSubmit}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -118,7 +124,7 @@ class SignUp extends React.Component {
                   id="email"
                   name="email"
                   autoComplete="email"
-                  autoFocus={false}
+                  autoFocus
                   value={email}
                   onChange={e => {
                     this.setState({ email: e.target.value }, () => {
@@ -140,27 +146,43 @@ class SignUp extends React.Component {
                   onChange={e => this.setState({ password: e.target.value })}
                 />
               </FormControl>
-              <FormControlLabel
-                className={classes.label}
-                control={
-                  <Checkbox
-                    checked={checkbox}
-                    color="primary"
-                    onChange={e => {
-                      this.setState({ checkbox: !checkbox }, () => {
-                        if (this.state.checkbox) {
-                          localStorage.setItem('checkbox', 'true');
-                          localStorage.setItem('email', this.state.email);
-                        } else {
-                          localStorage.setItem('checkbox', 'false');
-                          localStorage.setItem('email', '');
-                        }
-                      });
-                    }}
-                  />
-                }
-                label="I agree to the Terms and Conditions"
-              />
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <FormControlLabel
+                  className={classes.label}
+                  control={
+                    <Checkbox
+                      checked={checkbox}
+                      color="primary"
+                      onChange={e => {
+                        this.setState({ checkbox: !checkbox }, () => {
+                          console.log(this.state.checkbox);
+                          if (this.state.checkbox) {
+                            localStorage.setItem('checkbox', 'true');
+                            localStorage.setItem('email', this.state.email);
+                          } else {
+                            localStorage.setItem('checkbox', 'false');
+                            localStorage.setItem('email', '');
+                          }
+                        });
+                      }}
+                    />
+                  }
+                  label="Remember me"
+                />
+                <Button
+                  component={Link}
+                  className={classes.button}
+                  color="primary"
+                  to="/recover-password"
+                >
+                  Forgot Password?
+                </Button>
+              </Grid>
               <Button
                 type="submit"
                 fullWidth
@@ -168,7 +190,7 @@ class SignUp extends React.Component {
                 color="primary"
                 className={classes.submit}
               >
-                Sign up
+                Sign in
               </Button>
               <Grid
                 container
@@ -181,9 +203,9 @@ class SignUp extends React.Component {
                   component={Link}
                   className={classes.button}
                   color="primary"
-                  to="/signin"
+                  to="/signup"
                 >
-                  Already have an account?
+                  Create an account
                 </Button>
               </Grid>
             </form>
@@ -196,7 +218,7 @@ class SignUp extends React.Component {
   }
 }
 
-SignUp.propTypes = {
+SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   history: PropTypes.shape({
@@ -204,4 +226,4 @@ SignUp.propTypes = {
   }).isRequired,
 };
 
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(SignIn);
