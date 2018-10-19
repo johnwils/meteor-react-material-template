@@ -1,6 +1,6 @@
 [![eslint: airbnb](https://img.shields.io/badge/eslint-airbnb-blue.svg)](https://github.com/airbnb/javascript)
 [![prettier](https://img.shields.io/badge/-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-## A Meteor 1.7.0.5, React 16, React Router 4, Bootstrap 4 template
+## A Meteor 1.8, React 16, React Router 4, Material UI template
 
 Based off the official meteor scaffolding, with accounts, login and a demo collection that persists on login/logout.
 
@@ -17,7 +17,7 @@ Current routes setup:
 ## Quick start
 Clone repository:
 ```
-git clone https://github.com/johnwils/meteor-react-template.git
+git clone git@gitlab.com:johnner/meteor-react-material-template.git
 ```
 Install packages:
 ```
@@ -73,21 +73,8 @@ Basic roles are defined using `alanning:roles`.
 
 The first user created is 'admin' and subsequent users are 'user'.
 
-## SCSS
-SCSS is also locally scoped to each page/component folder. This makes managing styles easy, as .scss files are in the same folder as the component file.
-
-*Note:* most styling can be done via 'classes' using the Bootstrap API (see below)
-
-### Global styles
-There is 1 main.scss file that imports Bootstrap and 1 custom.scss to override default styles. An app-wide custom theme can be setup easily in custom.scss.
-## Bootstrap 4
-Bootstrap is being used directly on elements (adding to the 'class' or 'className') using the [v4 api](https://getbootstrap.com/docs/4.0/components/buttons/). This includes (so far) navbar, collapsed navbar, login/signup cards, search bar, dropdown menu and a modal. The api is well documented and easy to use. This approach limits the dependency on common external bootstrap packages.
-
 ## Autoprefixer
 Meteor's built-in css minify tool is replaced with `juliancwirko:postcss` ([mentioned](https://guide.meteor.com/build-tool.html#postcss) in the meteor docs). This package minifies CSS plus it makes use of a postcss entry in package.json to apply autoprefixer for wider browser support.
-
-## Responsive layout
-The grid from Bootstrap 4 ensures the layout is responsive on desktop and mobile. The navbar, modal and login/signup cards are good examples to check out on mobile.
 
 ## Testing
 
@@ -142,7 +129,6 @@ The ddp connection enables access to the existing server's methods, collections 
 - react-router-dom
 - autoprefixer
 - prettier
-- bootstrap
 - simpl-schema
 - recompose
 - jest
