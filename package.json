@@ -1,5 +1,5 @@
 {
-  "name": "meteor-bootstrap4-react-router4-template",
+  "name": "meteor-react-reactrouter-material-template",
   "private": true,
   "scripts": {
     "start": "meteor run",
