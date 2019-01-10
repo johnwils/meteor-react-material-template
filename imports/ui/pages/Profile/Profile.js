@@ -9,15 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 // components
-import Modal from '../../components/Modal/Modal';
-
-// methods
-import { countersIncrease } from '../../../api/counters/methods';
-
-// collection
-import Counters from '../../../api/counters/counters';
+import { layout } from '../../styles/Common';
+import AudioMain from '../../components/AudioMain/AudioMain';
 
 const styles = theme => ({
+  layout: layout(theme),
   button: {
     margin: theme.spacing.unit,
   },
@@ -25,11 +21,6 @@ const styles = theme => ({
     display: 'none',
   },
 });
-
-// components
-import Text from '../../components/Text';
-
-import './Profile.scss';
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -46,71 +37,16 @@ class Profile extends React.Component {
     return true;
   }
 
-  renderUserModal = () => {
-    const Body = () => (
-      <>
-        <Typography variant="body1">Meteor.userId():</Typography>
-        <code>{Meteor.userId()}</code>
-        <br />
-        <br />
-        <Typography variant="body1">Meteor.user():</Typography>
-        <code>
-          <pre>{JSON.stringify(Meteor.user(), null, 2)}</pre>
-        </code>
-        <Typography variant="body1">Counter:</Typography>
-        <code>
-          <pre>{JSON.stringify(this.props.counter, null, 2)}</pre>
-        </code>
-      </>
-    );
-    ReactDOM.render(
-      <Modal title="User info" body={<Body />} subtitle="subtitleeee" />,
-      document.createElement('div')
-    );
-  };
-
   render() {
-    const {
-      classes,
-      loggedIn,
-      // remote example (if using ddp)
-      // usersReady,
-      // users,
-      countersReady,
-      counter,
-    } = this.props;
-
-    // eslint-disable-line
-    // remote example (if using ddp)
-    /*
-    console.log('usersReady', usersReady);
-    console.log('users', users);
-    */
+    const { classes, loggedIn } = this.props;
     if (!loggedIn) {
       return null;
     }
     return (
-      <div className="profile-page">
+      <main className={classes.layout}>
         <h1>Profile Page</h1>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={this.renderUserModal}
-        >
-          Click for User Info
-        </Button>
-        <hr />
-        {countersReady && <Text count={counter.count} />}
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          onClick={() => countersIncrease.call({ _id: Meteor.userId() })}
-        >
-          Click Me
-        </Button>
-      </div>
+        <AudioMain />
+      </main>
     );
   }
 }
@@ -126,16 +62,6 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  // remote example (if using ddp)
-  // usersReady: PropTypes.bool.isRequired,
-  // users: Meteor.user() ? PropTypes.array.isRequired : () => null,
-  countersReady: PropTypes.bool.isRequired,
-  counter: Meteor.user()
-    ? PropTypes.shape({
-        _id: PropTypes.string,
-        count: PropTypes.number,
-      }).isRequired
-    : () => null,
 };
 
 const profile = withTracker(() => {
@@ -146,16 +72,10 @@ const profile = withTracker(() => {
   const usersReady = usersSub.ready() && !!users;
   */
 
-  // counters example
-  const countersSub = Meteor.subscribe('counters.user');
-  const counter = Counters.findOne({ _id: Meteor.userId() });
-  const countersReady = countersSub.ready() && !!counter;
   return {
     // remote example (if using ddp)
     // usersReady,
     // users,
-    countersReady,
-    counter,
   };
 })(Profile);
 

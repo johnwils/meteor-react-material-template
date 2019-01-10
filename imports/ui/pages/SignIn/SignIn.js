@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -19,48 +18,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // components
 import showAlert from '../../components/Alert';
 
-const styles = theme => ({
-  layout: {
-    width: 'auto',
-    display: 'block', // Fix IE11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-  paper: {
-    marginTop: theme.spacing.unit * 8,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`,
-  },
-  avatar: {
-    margin: theme.spacing.unit,
-  },
-  form: {
-    width: '100%', // Fix IE11 issue.
-    marginTop: theme.spacing.unit,
-  },
-  checkbox: {
-    margin: 0,
-  },
-  submit: {
-    marginTop: theme.spacing.unit,
-  },
-  container: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
-  },
-  label: {
-    marginRight: 0,
-    marginBottom: 0,
-  },
-});
+// styles
+import styles from '../../styles/SignInUp';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -112,7 +71,6 @@ class SignIn extends React.Component {
     }
     return (
       <React.Fragment>
-        <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Avatar alt="logo" className={classes.avatar} src="/img/logo.png" />

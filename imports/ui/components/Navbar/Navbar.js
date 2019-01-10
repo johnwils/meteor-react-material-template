@@ -65,7 +65,7 @@ class NavBar extends React.Component {
                 color="inherit"
                 onClick={() => this.props.history.push('/')}
               >
-                tNt
+                Brand
               </Button>
             </Typography>
             {auth ? (
