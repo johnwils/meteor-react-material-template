@@ -1,29 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-import './Landing.scss';
+import { layout } from '../../styles/Common';
+
+const styles = theme => ({
+  layout: layout(theme),
+});
 
 class Landing extends React.Component {
-  // componentDidMount() {
-  //   if (this.props.loggedIn) {
-  //     return this.props.history.push('/profile');
-  //   }
-  // }
-
-  // shouldComponentUpdate(nextProps) {
-  //   if (nextProps.loggedIn) {
-  //     nextProps.history.push('/profile');
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   render() {
-    // if (this.props.loggedIn) {
-    //   return null;
-    // }
+    const { classes } = this.props;
     return (
-      <div className="landing-page">
+      <div className={classes.layout}>
         <h1>Landing Page</h1>
       </div>
     );
@@ -31,10 +20,10 @@ class Landing extends React.Component {
 }
 
 Landing.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default Landing;
+export default withStyles(styles)(Landing);

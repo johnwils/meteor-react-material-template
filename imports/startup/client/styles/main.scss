@@ -1,9 +1,11 @@
-
 // custom global scss
 @import './custom.scss';
 
 //fonts
 @import './fonts/roboto.scss';
+
+// typography
+@import './material-typography.scss';
 
 body {
   font-family: 'Roboto', sans-serif;

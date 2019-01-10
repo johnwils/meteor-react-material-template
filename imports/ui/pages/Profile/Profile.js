@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 
 // components
 import { layout } from '../../styles/Common';
-import AudioMain from '../../components/AudioMain/AudioMain';
 
 const styles = theme => ({
   layout: layout(theme),
@@ -45,7 +44,6 @@ class Profile extends React.Component {
     return (
       <main className={classes.layout}>
         <h1>Profile Page</h1>
-        <AudioMain />
       </main>
     );
   }

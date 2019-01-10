@@ -1,13 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
-import './Not-Found.scss';
+import { layout } from '../../styles/Common';
 
-const NotFound = () => (
-  <div className="not-found-page">
-    <div className="alert alert-secondary" role="alert">
-      Page Not Found
-    </div>
-  </div>
-);
+const styles = theme => ({
+  layout: layout(theme),
+});
 
-export default NotFound;
+class NotFound extends React.Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.layout}>
+        <div className="mdc-typography--body1">Page Not Found</div>
+      </div>
+    );
+  }
+}
+
+NotFound.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default withStyles(styles)(NotFound);
