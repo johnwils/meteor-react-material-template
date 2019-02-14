@@ -1,12 +1,8 @@
-import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 // components
 import { layout } from '../../styles/Common';
