@@ -1,5 +1,14 @@
 {
-  "extends": ["eslint-config-meteor", "plugin:prettier/recommended", "plugin:react/recommended"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "eslint-config-meteor",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
+  ],
   "rules": {
     "jsx-a11y/label-has-for": false,
     "no-console": 0,
