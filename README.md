@@ -93,7 +93,7 @@ npm run test:e2e
 These tests appear live in-browser for debugging.
 
 ### CI
-CircleCI is used for continous integration
+CircleCI is used for continuous integration
 
 To run CI tests:
 
