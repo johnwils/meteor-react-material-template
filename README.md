@@ -2,14 +2,14 @@
 [![prettier](https://img.shields.io/badge/-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 ## A Meteor 1.8, React 16, React Router 5, Material UI template
 
-Based off the official meteor scaffolding, with accounts, login and a demo collection that persists on login/logout.
+Based off the official meteor scaffolding, with accounts and a demo collection that persists on signin/signout.
 
 Current routes setup:
 
 - landing (default logged out route)
 - signin
 - signup
-- profile (default logged in route)
+- profile
 - recover-password
 - reset-password
 - not-found
