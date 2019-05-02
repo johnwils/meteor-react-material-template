@@ -1,15 +1,15 @@
 [![eslint: airbnb](https://img.shields.io/badge/eslint-airbnb-blue.svg)](https://github.com/airbnb/javascript)
 [![prettier](https://img.shields.io/badge/-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-## A Meteor 1.8, React 16, React Router 4, Material UI template
+## A Meteor 1.8, React 16, React Router 5, Material UI template
 
 Based off the official meteor scaffolding, with accounts, login and a demo collection that persists on login/logout.
 
 Current routes setup:
 
-- landing (index route)
-- login
+- landing (default logged out route)
+- signin
 - signup
-- profile
+- profile (default logged in route)
 - recover-password
 - reset-password
 - not-found
@@ -25,20 +25,16 @@ meteor npm install
 ```
 Start Meteor:
 ```
-meteor
+meteor npm run start
 ```
 
 Navigate to [http://localhost:3000](http://localhost:3000) in any browser.
 
 
 ## Routing and redirects
-React Router 4 `props` are accessible in every top level 'page' component. This allows any page to access react router's 'redirect' functions and url params, etc. These can be passed onto any further components.
+React Router 5 `props` are accessible in every top level 'page' component. This allows any page to access react router's 'redirect' functions and url params, etc. These can be passed onto any further components.
 
 Also React Router's `withProps` HOC provides the same functionality to any component.
-
-When logged in, users are redirected to the '/profile' route.
-
-When logged out, users are redirect to the '/login' route.
 
 ## Folder structure
 
@@ -71,41 +67,52 @@ The following mixins are used with methods:
 ## Roles
 Basic roles are defined using `alanning:roles`.
 
-The first user created is 'admin' and subsequent users are 'user'.
-
-## Autoprefixer
-Meteor's built-in css minify tool is replaced with `juliancwirko:postcss` ([mentioned](https://guide.meteor.com/build-tool.html#postcss) in the meteor docs). This package minifies CSS plus it makes use of a postcss entry in package.json to apply autoprefixer for wider browser support.
+The first user created is assigned the 'admin' role. Subsequent users are assigned the 'user' role.
 
 ## Testing
 
-### Server tests
-Mocha is used to run tests and log test results on the server.
-Chai is used as an expectation / assertion library.
+### Unit tests
+Jest is used to test React components.
+Enzyme is used to assert, manipulate, and traverse React components.
 
-To run server tests on the example Counters methods and publications run:
+To run unit tests:
 
 ```
-npm run test-server
+npm run test:unit
 ```
 
-The server tests are in `imports/api/counters/`
+### E2E tests
+Cypress is used to for end-to-end testing.
 
-### Client tests (todo)
-Jest is used on the client to test React components.
-Enzyme is used to help test, assert, manipulate, and traverse React components.
+To run e2e tests:
+
+```
+npm run test:e2e
+```
+
+These tests appear live in-browser for debugging.
+
+### CI
+CircleCI is used for continous integration
+
+To run CI tests:
+
+```
+npm run test:e2e:ci
+```
+
+These tests run in headless mode.
 
 ## ESLint
 
-ESLint is used to enforce consistent styling.
+ESLint is used with `plugin:prettier/recommended` to enforce consistent styling.
 
-Airbnb and Prettier style presets are used.
-
-To clean the app run:
+To format files using prettier:
 ```
 npm run prettier
 ```
 
-This will conform files in the 'imports', 'client' and 'server' folders to the style presets.
+This will update files in the 'imports', 'client' and 'server' folders using prettier style presets.
 
 ## Connecting this template to an existing meteor backend
 A ddp connection can be made to an existing meteor server, following steps in [Meteor's official docs](https://docs.meteor.com/api/connections.html#DDP-connect)
