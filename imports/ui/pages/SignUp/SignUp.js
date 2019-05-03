@@ -24,6 +24,7 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      checkbox: false,
       email: '',
       password: '',
       errMsg: '',
@@ -47,7 +48,13 @@ class SignUp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { checkbox, email, password } = this.state;
+    if (!checkbox) {
+      return showAlert({
+        title: 'Terms of Use',
+        message: 'Please agree to the Terms of Use',
+      });
+    }
     Accounts.createUser({ email, password }, err => {
       if (err) {
         showAlert({ title: 'Sign Up Error', message: err.reason });
@@ -116,7 +123,11 @@ class SignUp extends React.Component {
                     }}
                   />
                 }
-                label="I agree to the Terms and Conditions"
+                label={
+                  <div>
+                    I agree to the <Link to="/terms-of-use">Terms of Use</Link>
+                  </div>
+                }
               />
               <Button
                 type="submit"

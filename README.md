@@ -12,6 +12,8 @@ Current routes setup:
 - profile
 - recover-password
 - reset-password
+- terms-of-use
+- privacy-policy
 - not-found
 
 ## Quick start
