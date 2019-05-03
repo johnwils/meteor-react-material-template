@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { layout } from '../../styles/Common';
+import { layout } from '../../styles/Layout';
 
 const styles = theme => ({
   layout: layout(theme),

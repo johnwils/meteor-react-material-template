@@ -12,7 +12,11 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // components
 import showAlert from '../../components/Alert';
 
+// global layout
+import { layout } from '../../styles/Layout';
+
 const styles = theme => ({
+  layout: layout(theme),
   form: {
     height: '300px',
     display: 'flex',

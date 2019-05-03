@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 
-// components
-import { layout } from '../../styles/Common';
+// global layout
+import { layout } from '../../styles/Layout';
 
 const styles = theme => ({
   layout: layout(theme),
