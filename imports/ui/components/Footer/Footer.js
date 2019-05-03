@@ -7,14 +7,14 @@ import { Grid } from '@material-ui/core';
 const styles = theme => ({
   root: {
     textAlign: 'center',
-    paddingBottom: 16,
+    padding: '16px 0',
   },
 });
 
 const Footer = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <Grid container spacing={24}>
+      <Grid container>
         <Grid item xs>
           <Link to="/terms-of-use">Terms of use</Link>
         </Grid>
