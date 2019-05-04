@@ -13,6 +13,7 @@ import {
   websiteUrl,
 } from '../../../startup/client/lib/constants';
 
+// eslint-disable-next-line
 const styles = theme => ({
   layout: {
     padding: '0 25px',
@@ -23,6 +24,7 @@ class TermsOfUse extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+
   render() {
     const { classes } = this.props;
     return (

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 
+// eslint-disable-next-line
 const styles = theme => ({
   root: {
     textAlign: 'center',
@@ -27,7 +28,7 @@ const Footer = ({ classes }) => {
 };
 
 Footer.propTypes = {
-  classes: PropTypes.object,
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Footer);
