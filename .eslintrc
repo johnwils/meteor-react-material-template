@@ -5,11 +5,12 @@
     }
   },
   "extends": [
-    "eslint-config-meteor",
+    "@meteorjs/eslint-config-meteor",
     "plugin:prettier/recommended",
     "plugin:react/recommended"
   ],
   "rules": {
+    "react/jsx-one-expression-per-line": false,
     "jsx-a11y/label-has-for": false,
     "no-console": 0,
     "consistent-return": 0,
