@@ -60,6 +60,7 @@ class ResetPassword extends React.Component {
       this.props.history.push('/profile');
     });
   };
+
   render() {
     const { classes } = this.props;
     const { password } = this.state;

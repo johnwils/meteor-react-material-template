@@ -62,6 +62,7 @@ class SignUp extends React.Component {
       }
     });
   }
+
   render() {
     const { classes, loggedIn } = this.props;
     const { email, password, checkbox } = this.state;

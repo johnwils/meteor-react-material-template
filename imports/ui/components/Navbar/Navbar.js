@@ -26,12 +26,7 @@ const styles = {
 
 class NavBar extends React.Component {
   state = {
-    auth: true,
     anchorEl: null,
-  };
-
-  handleChange = event => {
-    this.setState({ auth: event.target.checked });
   };
 
   handleMenu = event => {
@@ -43,7 +38,7 @@ class NavBar extends React.Component {
   };
 
   render() {
-    const { classes, loggedIn: auth } = this.props;
+    const { classes, loggedIn, history } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -59,14 +54,11 @@ class NavBar extends React.Component {
               <MenuIcon />
             </IconButton> */}
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              <Button
-                color="inherit"
-                onClick={() => this.props.history.push('/')}
-              >
+              <Button color="inherit" onClick={() => history.push('/')}>
                 Brand
               </Button>
             </Typography>
-            {auth ? (
+            {loggedIn ? (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -92,7 +84,7 @@ class NavBar extends React.Component {
                 >
                   <MenuItem
                     onClick={() => {
-                      this.props.history.push('/profile');
+                      history.push('/profile');
                       this.handleClose();
                     }}
                   >
@@ -100,7 +92,7 @@ class NavBar extends React.Component {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      this.props.history.push('/');
+                      history.push('/');
                       this.handleClose();
                     }}
                   >
@@ -109,7 +101,7 @@ class NavBar extends React.Component {
                   <MenuItem
                     onClick={() => {
                       Meteor.logout();
-                      this.props.history.push('/signin');
+                      history.push('/signin');
                       this.handleClose();
                     }}
                   >
@@ -119,16 +111,10 @@ class NavBar extends React.Component {
               </div>
             ) : (
               <div>
-                <Button
-                  color="inherit"
-                  onClick={() => this.props.history.push('signup')}
-                >
+                <Button color="inherit" onClick={() => history.push('signup')}>
                   Signup
                 </Button>
-                <Button
-                  color="inherit"
-                  onClick={() => this.props.history.push('signin')}
-                >
+                <Button color="inherit" onClick={() => history.push('signin')}>
                   Signin
                 </Button>
               </div>

@@ -4,7 +4,7 @@
   "scripts": {
     "start": "meteor run --settings settings-local-dev.json",
     "start:e2e": "meteor run --port 3050 --settings settings-local-dev.json",
-    "lint": "eslint \"imports/**/*.js\" \"cypress/**/*.js\"; exit 0",
+    "lint": "eslint \"imports/**/*.js\"; exit 0",
     "cypress:open": "cypress open",
     "cypress:headless": "cypress run --config video=false",
     "test:e2e": "start-server-and-test start:e2e http://localhost:3050 cypress:open",
