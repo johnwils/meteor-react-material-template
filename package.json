@@ -9,7 +9,7 @@
     "cypress:headless": "cypress run --config video=false",
     "test:e2e": "start-server-and-test start:e2e http://localhost:3050 cypress:open",
     "test:e2e:ci": "start-server-and-test start:e2e http://localhost:3050 cypress:headless",
-    "test:unit": "NODE_ENV=UNIT_TESTING jest --passWithNoTests",
+    "test:unit": "NODE_ENV=UNIT_TESTING jest",
     "prettier": "prettier --write \"client/**/*.js\" \"imports/**/*.js\" \"server/**/*.js\" \"cypress/**/*.js\" --single-quote true --trailing-comma es5",
     "clean": "rm -rf node_modules/ package-lock.json && meteor npm i"
   },
