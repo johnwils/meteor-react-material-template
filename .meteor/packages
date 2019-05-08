@@ -14,6 +14,7 @@ session@1.2.0
 react-meteor-data
 accounts-password@1.5.1
 
+standard-minifier-js@2.4.1
 standard-minifier-css@1.5.3
 es5-shim@4.8.0                    # ECMAScript 5 compatibility for older browsers
 ecmascript@0.12.4                 # Enable ECMAScript2015+ syntax in app code
@@ -25,12 +26,13 @@ fortawesome:fontawesome
 browser-policy@1.1.0
 aldeed:collection2@3.0.0
 matb33:collection-hooks
-# msavin:mongol
+msavin:mongol
 alanning:roles
 mizzao:user-status
-
 mdg:validated-method
 didericis:callpromise-mixin
 lacosta:method-hooks
 tunifight:loggedin-mixin
-standard-minifier-js@2.4.1
+
+johanbrook:publication-collector
+meteortesting:mocha

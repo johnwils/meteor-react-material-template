@@ -10,6 +10,7 @@
     "test:e2e": "start-server-and-test start:e2e http://localhost:3050 cypress:open",
     "test:e2e:ci": "start-server-and-test start:e2e http://localhost:3050 cypress:headless",
     "test:unit": "NODE_ENV=UNIT_TESTING jest",
+    "test:server": "mv ./cypress ./private/cypress && TEST_CLIENT=0 meteor test --once --driver-package meteortesting:mocha && mv ./private/cypress ./cypress",
     "prettier": "prettier --write \"client/**/*.js\" \"imports/**/*.js\" \"server/**/*.js\" \"cypress/**/*.js\" --single-quote true --trailing-comma es5",
     "clean": "rm -rf node_modules/ package-lock.json && meteor npm i"
   },
@@ -48,6 +49,7 @@
     "@meteorjs/eslint-config-meteor": "^1.0.5",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
+    "chai": "^4.2.0",
     "chromedriver": "^74.0.0",
     "cypress": "^3.2.0",
     "enzyme": "^3.9.0",
