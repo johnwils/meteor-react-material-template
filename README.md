@@ -50,6 +50,10 @@ Reusable components in the 'components' directory are 'dumb' or ''presentational
 
 *Note:* Meteor's reactive `withTracker` can also fetch data in any sub component (if really needed).
 
+### Styling
+
+[Material UI](https://material-ui.com/) is used to create a top level theme. React components use this default theme for consistent styling (colors, padding, border, etc.). The `@material-ui` package is used for [CSS normalization](https://material-ui.com/style/css-baseline/), responsive grid and [components](https://material-ui.com/demos/app-bar/).
+
 ### API
 The 'api' folder contains 1 folder per collection (all methods and publications for each endpoint are exclusive to each folder). This makes it easy to maintain each collection endpoint. All collections use `aldeed:collection2` to enable schema validation on inserts. Both collections and methods use `simpl-schema` to validate parameters.
 
@@ -83,8 +87,17 @@ To run unit tests:
 npm run test:unit
 ```
 
+### Server tests
+Mocha and Chai are used to test Meteor server collections, methods and publications.
+
+To run server tests:
+
+```
+npm run test:server
+```
+
 ### E2E tests
-Cypress is used to for end-to-end testing.
+Cypress is used for end-to-end testing.
 
 To run e2e tests:
 
