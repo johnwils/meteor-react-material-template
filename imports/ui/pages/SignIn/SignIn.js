@@ -18,7 +18,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import showAlert from '../../components/Alert';
 
 // styles
-import styles from '../../styles/SignInUp';
+import styles from '../../styles/custom/SignInUp';
 
 class SignIn extends React.Component {
   state = {

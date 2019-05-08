@@ -1,5 +1,8 @@
-import layout from './Layout';
+import layout from '../Layout';
 
+/**
+ * Custom layout used for SignIn and SignUp pages
+ */
 export default theme => ({
   layout: layout(theme),
   paper: {
