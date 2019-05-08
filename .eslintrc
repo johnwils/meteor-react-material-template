@@ -10,6 +10,7 @@
     "plugin:react/recommended"
   ],
   "rules": {
+    "react/forbid-prop-types": false,
     "react/jsx-wrap-multilines": false,
     "react/jsx-one-expression-per-line": false,
     "jsx-a11y/label-has-for": false,
