@@ -60,11 +60,11 @@ The theme is passed down to each React component for consistent styling (colors,
 The 'api' folder contains 1 folder per collection (all methods and publications for each endpoint are exclusive to each folder). This makes it easy to maintain each collection endpoint. All collections use `aldeed:collection2` to enable schema validation on inserts. Both collections and methods use `simpl-schema` to validate parameters.
 
 #### Methods
-Methods use MDG's [mdg:validated-method](https://atmospherejs.com/mdg/validated-method). The benefits of validated methods over regular methods are listed here: [https://atmospherejs.com/mdg/validated-method#benefits-of-validatedmethod](https://atmospherejs.com/mdg/validated-method#benefits-of-validatedmethod)
+Methods use MDG's [mdg:validated-method](https://atmospherejs.com/mdg/validated-method). The benefits of validated methods over regular Meteor methods are listed here: [https://atmospherejs.com/mdg/validated-method#benefits-of-validatedmethod](https://atmospherejs.com/mdg/validated-method#benefits-of-validatedmethod)
 
 ##### Validated Method Mixins:
 
-The following mixins are used with methods:
+The following mixins are used:
 
 - [didericis:callpromise-mixin](https://atmospherejs.com/didericis/callpromise-mixin) is used to return a promise to the client instead of a callback. Async/await code is used on the client for handling methods.
 
@@ -75,7 +75,7 @@ The following mixins are used with methods:
 ## Roles
 Basic roles are defined using `alanning:roles`.
 
-The first user created is assigned the 'admin' role. Subsequent users are assigned the 'user' role.
+The first user created is assigned the 'admin' role. Subsequent users are assigned the 'user' role. These roles can be used to give special access to server publications, render conditional UI and prevent unauthorized users from accessing server methods.
 
 ## Testing
 
