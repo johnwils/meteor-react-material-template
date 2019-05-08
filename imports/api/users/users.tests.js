@@ -3,4 +3,3 @@
 // https://guide.meteor.com/testing.html
 
 import { Meteor } from 'meteor/meteor';
-import { assert } from 'meteor/practicalmeteor:chai';

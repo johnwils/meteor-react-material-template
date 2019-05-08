@@ -21,20 +21,16 @@ import showAlert from '../../components/Alert';
 import styles from '../../styles/SignInUp';
 
 class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checkbox: false,
-      email: '',
-      password: '',
-      errMsg: '',
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    checkbox: false,
+    email: '',
+    password: '',
+  };
 
   componentDidMount() {
-    if (this.props.loggedIn) {
-      return this.props.history.push('/profile');
+    const { loggedIn, history } = this.props;
+    if (loggedIn) {
+      return history.push('/profile');
     }
   }
 
@@ -46,7 +42,7 @@ class SignUp extends React.Component {
     return true;
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     const { checkbox, email, password } = this.state;
     if (!checkbox) {
@@ -61,7 +57,7 @@ class SignUp extends React.Component {
         return console.log(err);
       }
     });
-  }
+  };
 
   render() {
     const { classes, loggedIn } = this.props;
@@ -87,8 +83,8 @@ class SignUp extends React.Component {
                   value={email}
                   onChange={e => {
                     this.setState({ email: e.target.value }, () => {
-                      if (this.state.checkbox) {
-                        localStorage.setItem('email', this.state.email);
+                      if (checkbox) {
+                        localStorage.setItem('email', email);
                       }
                     });
                   }}
@@ -111,11 +107,11 @@ class SignUp extends React.Component {
                   <Checkbox
                     checked={checkbox}
                     color="primary"
-                    onChange={e => {
+                    onChange={() => {
                       this.setState({ checkbox: !checkbox }, () => {
-                        if (this.state.checkbox) {
+                        if (checkbox) {
                           localStorage.setItem('checkbox', 'true');
-                          localStorage.setItem('email', this.state.email);
+                          localStorage.setItem('email', email);
                         } else {
                           localStorage.setItem('checkbox', 'false');
                           localStorage.setItem('email', '');

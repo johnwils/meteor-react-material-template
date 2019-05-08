@@ -21,15 +21,11 @@ import showAlert from '../../components/Alert';
 import styles from '../../styles/SignInUp';
 
 class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      checkbox: false,
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    email: '',
+    password: '',
+    checkbox: false,
+  };
 
   componentDidMount() {
     const { loggedIn, history } = this.props;
@@ -50,7 +46,7 @@ class SignIn extends React.Component {
     return true;
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     const { email, password } = this.state;
     Meteor.loginWithPassword(email, password, err => {
@@ -59,7 +55,7 @@ class SignIn extends React.Component {
         return console.log(err);
       }
     });
-  }
+  };
 
   render() {
     const { classes, loggedIn } = this.props;
@@ -85,8 +81,8 @@ class SignIn extends React.Component {
                   value={email}
                   onChange={e => {
                     this.setState({ email: e.target.value }, () => {
-                      if (this.state.checkbox) {
-                        localStorage.setItem('email', this.state.email);
+                      if (checkbox) {
+                        localStorage.setItem('email', email);
                       }
                     });
                   }}
@@ -115,11 +111,12 @@ class SignIn extends React.Component {
                     <Checkbox
                       checked={checkbox}
                       color="primary"
-                      onChange={e => {
+                      onChange={() => {
                         this.setState({ checkbox: !checkbox }, () => {
-                          console.log(this.state.checkbox);
+                          // eslint-disable-next-line react/destructuring-assignment
                           if (this.state.checkbox) {
                             localStorage.setItem('checkbox', 'true');
+                            // eslint-disable-next-line react/destructuring-assignment
                             localStorage.setItem('email', this.state.email);
                           } else {
                             localStorage.setItem('checkbox', 'false');

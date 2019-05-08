@@ -13,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import showAlert from '../../components/Alert';
 
 // global layout
-import { layout } from '../../styles/Layout';
+import layout from '../../styles/Layout';
 
 const styles = theme => ({
   layout: layout(theme),
@@ -61,7 +61,12 @@ class RecoverPassword extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { email } = this.state;
+    const { email, sending } = this.state;
+
+    if (sending) {
+      return <div>Sending...</div>;
+    }
+
     return (
       <form onSubmit={this.handleSubmit}>
         <Grid container direction="column" alignItems="center">

@@ -13,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import showAlert from '../../components/Alert';
 
 // global layout
-import { layout } from '../../styles/Layout';
+import layout from '../../styles/Layout';
 
 const styles = theme => ({
   layout: layout(theme),
@@ -36,7 +36,7 @@ class ResetPassword extends React.Component {
   };
 
   updatePassword = () => {
-    const { token } = this.props.match.params;
+    const { match, history } = this.props;
     const { password } = this.state;
     if (!password.length) {
       return showAlert({
@@ -45,8 +45,8 @@ class ResetPassword extends React.Component {
       });
     }
     this.setState({ sending: true });
-    Accounts.resetPassword(token, password, err => {
-      this.setState({ sending: false, email: '' });
+    Accounts.resetPassword(match.params.token, password, err => {
+      this.setState({ sending: false, password: '' });
       if (err) {
         return showAlert({
           title: 'Reset Password Error',
@@ -57,13 +57,18 @@ class ResetPassword extends React.Component {
         title: 'Password Reset',
         message: 'You successfully updated your password',
       });
-      this.props.history.push('/profile');
+      history.push('/profile');
     });
   };
 
   render() {
     const { classes } = this.props;
-    const { password } = this.state;
+    const { password, sending } = this.state;
+
+    if (sending) {
+      return <div>Sending...</div>;
+    }
+
     return (
       <form onSubmit={this.handleSubmit}>
         <Grid container direction="column" alignItems="center">
@@ -101,10 +106,10 @@ ResetPassword.propTypes = {
     params: PropTypes.shape({
       token: PropTypes.string.isRequired,
     }),
-  }),
+  }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default withStyles(styles)(ResetPassword);

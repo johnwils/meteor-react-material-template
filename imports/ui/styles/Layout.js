@@ -1,4 +1,4 @@
-export const layout = theme => ({
+const layout = theme => ({
   width: 'auto',
   display: 'block', // Fix IE11 issue.
   [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -9,3 +9,5 @@ export const layout = theme => ({
   marginTop: '2rem',
   textAlign: 'center',
 });
+
+export default layout;

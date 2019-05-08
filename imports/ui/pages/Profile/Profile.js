@@ -1,16 +1,27 @@
-import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { withTracker } from 'meteor/react-meteor-data';
+
+// api
+import Counters from '../../../api/counters/counters';
+import { countersIncrease } from '../../../api/counters/methods';
+
+// constants
+import { supportEmail } from '../../../startup/client/lib/constants';
 
 // global layout
-import { layout } from '../../styles/Layout';
+import layout from '../../styles/Layout';
+
+// components
+import showAlert from '../../components/Alert';
 
 const styles = theme => ({
   layout: layout(theme),
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit * 3,
   },
   input: {
     display: 'none',
@@ -19,8 +30,9 @@ const styles = theme => ({
 
 class Profile extends React.Component {
   componentDidMount() {
-    if (!this.props.loggedIn) {
-      return this.props.history.push('/signin');
+    const { loggedIn, history } = this.props;
+    if (!loggedIn) {
+      return history.push('/signin');
     }
   }
 
@@ -32,14 +44,39 @@ class Profile extends React.Component {
     return true;
   }
 
+  handleCounterIncrease = async () => {
+    try {
+      await countersIncrease.callPromise({ _id: Meteor.userId() });
+    } catch (error) {
+      showAlert({
+        title: 'Counter API Error',
+        message: `Contact ${supportEmail}`,
+      });
+      throw new Error(error.message);
+    }
+  };
+
   render() {
-    const { classes, loggedIn } = this.props;
+    const { classes, loggedIn, countersReady, counter } = this.props;
     if (!loggedIn) {
       return null;
     }
     return (
       <main className={classes.layout}>
         <h1>Profile Page</h1>
+        {countersReady && <code>{JSON.stringify(counter, null, 2)}</code>}
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.handleCounterIncrease}
+        >
+          Click
+        </Button>
+        <p>
+          <code>count</code> is tied to this user,
+        </p>
+        <p>persisting on reload, logout/login.</p>
       </main>
     );
   }
@@ -56,6 +93,11 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  countersReady: PropTypes.bool.isRequired,
+  counter: PropTypes.shape({
+    _id: PropTypes.string,
+    count: PropTypes.number,
+  }),
 };
 
 const profile = withTracker(() => {
@@ -66,10 +108,17 @@ const profile = withTracker(() => {
   const usersReady = usersSub.ready() && !!users;
   */
 
+  // counters example
+  const countersSub = Meteor.subscribe('counters.user');
+  const counter = Counters.findOne({ _id: Meteor.userId() });
+  const countersReady = countersSub.ready() && !!counter;
+
   return {
     // remote example (if using ddp)
     // usersReady,
     // users,
+    countersReady,
+    counter,
   };
 })(Profile);
 

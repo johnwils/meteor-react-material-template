@@ -1,4 +1,4 @@
-import { layout } from './Layout';
+import layout from './Layout';
 
 export default theme => ({
   layout: layout(theme),

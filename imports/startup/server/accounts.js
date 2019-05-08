@@ -2,6 +2,7 @@
  * Accounts Setup
  */
 
+import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import Counters from '../../api/counters/counters.js';
 

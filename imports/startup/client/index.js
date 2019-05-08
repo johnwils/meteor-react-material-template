@@ -10,6 +10,7 @@ import App from '../../ui/layouts/App';
 
 // mount app
 Meteor.startup(() => {
+  // eslint-disable-next-line no-underscore-dangle
   window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
   render(
     <>

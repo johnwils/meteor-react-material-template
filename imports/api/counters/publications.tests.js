@@ -3,8 +3,9 @@
 // https://guide.meteor.com/testing.html
 
 import { Random } from 'meteor/random';
-import { assert } from 'meteor/practicalmeteor:chai';
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
+import { assert } from 'chai';
+import _ from 'lodash';
 
 import Counters from './counters.js';
 import './publications.js';

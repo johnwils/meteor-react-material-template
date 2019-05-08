@@ -3,7 +3,7 @@
 // https://guide.meteor.com/testing.html
 
 import { Meteor } from 'meteor/meteor';
-import { assert } from 'meteor/practicalmeteor:chai';
+import { assert } from 'chai';
 import Counters from './counters.js';
 
 if (Meteor.isServer) {

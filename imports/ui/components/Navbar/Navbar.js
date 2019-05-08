@@ -55,7 +55,7 @@ class NavBar extends React.Component {
             </IconButton> */}
             <Typography variant="h6" color="inherit" className={classes.grow}>
               <Button color="inherit" onClick={() => history.push('/')}>
-                Brand
+                Brand/Landing
               </Button>
             </Typography>
             {loggedIn ? (
