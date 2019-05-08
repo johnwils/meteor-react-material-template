@@ -52,7 +52,9 @@ Reusable components in the 'components' directory are 'dumb' or ''presentational
 
 ### Styling
 
-[Material UI](https://material-ui.com/) is used to create a top level theme. React components use this default theme for consistent styling (colors, padding, border, etc.). The `@material-ui` package is used for [CSS normalization](https://material-ui.com/style/css-baseline/), responsive grid and [components](https://material-ui.com/demos/app-bar/).
+[Material UI](https://material-ui.com/) is used to create a top level style theme.
+
+The theme is passed down to each React component for consistent styling (colors, padding, border, etc.). The `@material-ui` package is used for [CSS normalization](https://material-ui.com/style/css-baseline/), responsive grid and layout. Material UI [components](https://material-ui.com/demos/app-bar/) are used including navbars, forms, modals, inputs, buttons, etc.
 
 ### API
 The 'api' folder contains 1 folder per collection (all methods and publications for each endpoint are exclusive to each folder). This makes it easy to maintain each collection endpoint. All collections use `aldeed:collection2` to enable schema validation on inserts. Both collections and methods use `simpl-schema` to validate parameters.
