@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,106 +24,94 @@ const styles = {
   },
 };
 
-class NavBar extends React.Component {
-  state = {
-    anchorEl: null,
-  };
+function NavBar({ classes, loggedIn, history }) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenu = e => setAnchorEl(e.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  const open = Boolean(anchorEl);
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  render() {
-    const { classes, loggedIn, history } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
-
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            {/* <IconButton
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          {/* <IconButton
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
             >
               <MenuIcon />
             </IconButton> */}
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              <Button color="inherit" onClick={() => history.push('/')}>
-                Brand/Landing
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Button color="inherit" onClick={() => history.push('/')}>
+              Brand/Landing
+            </Button>
+          </Typography>
+          {loggedIn ? (
+            <div>
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : null}
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  onClick={() => {
+                    history.push('/profile');
+                    handleClose();
+                  }}
+                >
+                  Profile
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    history.push('/');
+                    handleClose();
+                  }}
+                >
+                  Landing
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    Meteor.logout();
+                    history.push('/signin');
+                    handleClose();
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
+            </div>
+          ) : (
+            <div>
+              <Button color="inherit" onClick={() => history.push('signup')}>
+                Signup
               </Button>
-            </Typography>
-            {loggedIn ? (
-              <div>
-                <IconButton
-                  aria-owns={open ? 'menu-appbar' : null}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem
-                    onClick={() => {
-                      history.push('/profile');
-                      this.handleClose();
-                    }}
-                  >
-                    Profile
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      history.push('/');
-                      this.handleClose();
-                    }}
-                  >
-                    Landing
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      Meteor.logout();
-                      history.push('/signin');
-                      this.handleClose();
-                    }}
-                  >
-                    Logout
-                  </MenuItem>
-                </Menu>
-              </div>
-            ) : (
-              <div>
-                <Button color="inherit" onClick={() => history.push('signup')}>
-                  Signup
-                </Button>
-                <Button color="inherit" onClick={() => history.push('signin')}>
-                  Signin
-                </Button>
-              </div>
-            )}
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+              <Button color="inherit" onClick={() => history.push('signin')}>
+                Signin
+              </Button>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
 NavBar.propTypes = {

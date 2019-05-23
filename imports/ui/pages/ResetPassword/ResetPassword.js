@@ -1,5 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -11,6 +11,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 // components
 import showAlert from '../../components/Alert';
+import Sending from '../../components/Sending';
 
 // global layout
 import layout from '../../styles/Layout';
@@ -29,24 +30,21 @@ const styles = theme => ({
   },
 });
 
-class ResetPassword extends React.Component {
-  state = {
-    sending: false,
-    password: '',
-  };
+function ResetPassword({ match, history, classes }) {
+  const [sending, setSending] = useState(false);
+  const [password, setPassword] = useState('');
 
-  updatePassword = () => {
-    const { match, history } = this.props;
-    const { password } = this.state;
+  const updatePassword = () => {
     if (!password.length) {
       return showAlert({
         title: 'Reset Password Error',
         message: 'Password required',
       });
     }
-    this.setState({ sending: true });
+    setSending(true);
     Accounts.resetPassword(match.params.token, password, err => {
-      this.setState({ sending: false, password: '' });
+      setSending(false);
+      setPassword('false');
       if (err) {
         return showAlert({
           title: 'Reset Password Error',
@@ -61,43 +59,36 @@ class ResetPassword extends React.Component {
     });
   };
 
-  render() {
-    const { classes } = this.props;
-    const { password, sending } = this.state;
-
-    if (sending) {
-      return <div>Sending...</div>;
-    }
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <Grid container direction="column" alignItems="center">
-          <Typography className={classes.title} variant="h5">
-            Reset Password
-          </Typography>
-          <FormControl margin="normal" required>
-            <InputLabel htmlFor="password">New Password</InputLabel>
-            <Input
-              className={classes.password}
-              id="password"
-              name="password"
-              autoFocus
-              value={password}
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-          </FormControl>
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            onClick={this.updatePassword}
-          >
-            Update Password
-          </Button>
-        </Grid>
-      </form>
-    );
+  if (sending) {
+    return <Sending />;
   }
+
+  return (
+    <Grid container direction="column" alignItems="center">
+      <Typography className={classes.title} variant="h5">
+        Reset Password
+      </Typography>
+      <FormControl margin="normal" required>
+        <InputLabel htmlFor="password">New Password</InputLabel>
+        <Input
+          className={classes.password}
+          id="password"
+          name="password"
+          autoFocus
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      </FormControl>
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={updatePassword}
+      >
+        Update Password
+      </Button>
+    </Grid>
+  );
 }
 
 ResetPassword.propTypes = {

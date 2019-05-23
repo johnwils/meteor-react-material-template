@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -21,41 +21,31 @@ const styles = theme => ({
   },
 });
 
-class SimpleModal extends React.Component {
-  state = {
-    open: true,
-  };
+function SimpleModal({ classes, title, body }) {
+  const [open, setOpen] = useState(true);
+  const handleClose = () => setOpen(false);
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const { classes, title, body } = this.props;
-    const { open } = this.state;
-
-    return (
-      <div>
-        <Modal
-          aria-labelledby="modal-title"
-          aria-describedby="simple-modal-description"
-          className={classes.modal}
-          open={open}
-          onClose={this.handleClose}
-        >
-          <Slide direction="down" in={open} mountOnEnter unmountOnExit>
-            <div className={classes.paper}>
-              <Typography variant="h6" id="modal-title">
-                {title}
-              </Typography>
-              <br />
-              {body}
-            </div>
-          </Slide>
-        </Modal>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Modal
+        aria-labelledby="modal-title"
+        aria-describedby="simple-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+      >
+        <Slide direction="down" in={open} mountOnEnter unmountOnExit>
+          <div className={classes.paper}>
+            <Typography variant="h6" id="modal-title">
+              {title}
+            </Typography>
+            <br />
+            {body}
+          </div>
+        </Slide>
+      </Modal>
+    </div>
+  );
 }
 
 SimpleModal.propTypes = {

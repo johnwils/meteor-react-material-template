@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -28,23 +28,14 @@ const styles = theme => ({
   },
 });
 
-class Profile extends React.Component {
-  componentDidMount() {
-    const { loggedIn, history } = this.props;
+function Profile({ history, classes, loggedIn, countersReady, counter }) {
+  useEffect(() => {
     if (!loggedIn) {
-      return history.push('/signin');
+      history.push('/signin');
     }
-  }
+  }, [loggedIn]);
 
-  shouldComponentUpdate(nextProps) {
-    if (!nextProps.loggedIn) {
-      nextProps.history.push('/signin');
-      return false;
-    }
-    return true;
-  }
-
-  handleCounterIncrease = async () => {
+  const handleCounterIncrease = async () => {
     try {
       await countersIncrease.callPromise({ _id: Meteor.userId() });
     } catch (error) {
@@ -56,30 +47,24 @@ class Profile extends React.Component {
     }
   };
 
-  render() {
-    const { classes, loggedIn, countersReady, counter } = this.props;
-    if (!loggedIn) {
-      return null;
-    }
-    return (
-      <main className={classes.layout}>
-        <h1>Profile Page</h1>
-        {countersReady && <code>{JSON.stringify(counter, null, 2)}</code>}
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={this.handleCounterIncrease}
-        >
-          Click
-        </Button>
-        <p>
-          <code>count</code> is tied to this user,
-        </p>
-        <p>persisting on reload, logout/login.</p>
-      </main>
-    );
-  }
+  return (
+    <main className={classes.layout}>
+      <h1>Profile Page</h1>
+      {countersReady && <code>{JSON.stringify(counter, null, 2)}</code>}
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={handleCounterIncrease}
+      >
+        Click
+      </Button>
+      <p>
+        <code>count</code> is tied to this user,
+      </p>
+      <p>persisting on reload, logout/login.</p>
+    </main>
+  );
 }
 
 Profile.defaultProps = {

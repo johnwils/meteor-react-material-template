@@ -1,5 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
@@ -20,31 +20,19 @@ import showAlert from '../../components/Alert';
 // styles
 import styles from '../../styles/custom/SignInUp';
 
-class SignUp extends React.Component {
-  state = {
-    checkbox: false,
-    email: '',
-    password: '',
-  };
+function SignUp({ loggedIn, history, classes }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkbox, setCheckbox] = useState(false);
 
-  componentDidMount() {
-    const { loggedIn, history } = this.props;
+  useEffect(() => {
     if (loggedIn) {
-      return history.push('/profile');
+      history.push('/profile');
     }
-  }
+  }, [loggedIn]);
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.loggedIn) {
-      nextProps.history.push('/profile');
-      return false;
-    }
-    return true;
-  }
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const { checkbox, email, password } = this.state;
     if (!checkbox) {
       return showAlert({
         title: 'Terms of Use',
@@ -59,106 +47,85 @@ class SignUp extends React.Component {
     });
   };
 
-  render() {
-    const { classes, loggedIn } = this.props;
-    const { email, password, checkbox } = this.state;
-
-    if (loggedIn) {
-      return null;
-    }
-    return (
-      <React.Fragment>
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <Avatar alt="logo" className={classes.avatar} src="/img/logo.png" />
-            <Typography variant="h5">Sign up</Typography>
-            <form className={classes.form} onSubmit={this.handleSubmit}>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="email">Email Address</InputLabel>
-                <Input
-                  id="email"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus={false}
-                  value={email}
-                  onChange={e => {
-                    this.setState({ email: e.target.value }, () => {
-                      if (checkbox) {
-                        localStorage.setItem('email', email);
-                      }
-                    });
-                  }}
-                />
-              </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={e => this.setState({ password: e.target.value })}
-                />
-              </FormControl>
-              <FormControlLabel
-                className={classes.label}
-                control={
-                  <Checkbox
-                    checked={checkbox}
-                    color="primary"
-                    onChange={() => {
-                      this.setState({ checkbox: !checkbox }, () => {
-                        if (checkbox) {
-                          localStorage.setItem('checkbox', 'true');
-                          localStorage.setItem('email', email);
-                        } else {
-                          localStorage.setItem('checkbox', 'false');
-                          localStorage.setItem('email', '');
-                        }
-                      });
-                    }}
-                  />
-                }
-                label={
-                  <div>
-                    I agree to the <Link to="/terms-of-use">Terms of Use</Link>
-                  </div>
-                }
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign up
-              </Button>
-              <Grid
-                container
-                className={classes.container}
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                <Button
-                  component={Link}
-                  className={classes.button}
-                  color="primary"
-                  to="/signin"
-                >
-                  Already have an account?
-                </Button>
-              </Grid>
-            </form>
-            &copy;
-            {new Date().getFullYear()} John Wilson
-          </Paper>
-        </main>
-      </React.Fragment>
-    );
+  if (loggedIn) {
+    return null;
   }
+  return (
+    <React.Fragment>
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <Avatar alt="logo" className={classes.avatar} src="/img/logo.png" />
+          <Typography variant="h5">Sign up</Typography>
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus={false}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input
+                name="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </FormControl>
+            <FormControlLabel
+              className={classes.label}
+              control={
+                <Checkbox
+                  checked={checkbox}
+                  color="primary"
+                  onChange={() => setCheckbox(!checkbox)}
+                />
+              }
+              label={
+                <div>
+                  I agree to the <Link to="/terms-of-use">Terms of Use</Link>
+                </div>
+              }
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign up
+            </Button>
+            <Grid
+              container
+              className={classes.container}
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Button
+                component={Link}
+                className={classes.button}
+                color="primary"
+                to="/signin"
+              >
+                Already have an account?
+              </Button>
+            </Grid>
+          </form>
+          &copy;
+          {new Date().getFullYear()} John Wilson
+        </Paper>
+      </main>
+    </React.Fragment>
+  );
 }
 
 SignUp.propTypes = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
@@ -13,47 +13,45 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class Alert extends React.Component {
-  state = {
-    open: true,
-  };
+function Alert({ title, message }) {
+  const [open, setOpen] = useState(true);
+  useEffect(() => {
+    //
+    // same as: componentDidMount(), componentDidUpdate()
+    //
+    return function cleanUp() {
+      // same as: componentWillUnmount
+      setOpen(false);
+    };
+    // effect dependency array
+  }, [open]); // Only re-run the effect if variable changes
 
-  componentWillUnmount = () => {
-    this.setState({ open: false });
-  };
+  const handleClose = () => setOpen(false);
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const { title, message } = this.props;
-    const { open } = this.state;
-    return (
-      <div>
-        <Dialog
-          open={open}
-          TransitionComponent={Transition}
-          keepMounted={false}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle>{title}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              {message}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted={false}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {message}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
 
 Alert.propTypes = {
