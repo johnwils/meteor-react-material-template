@@ -9,26 +9,26 @@ export default theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `0px ${theme.spacing.unit * 3}px`,
+    padding: `0px ${theme.spacing(3)}px`,
     boxShadow: 'none',
     backgroundColor: 'transparent',
   },
   avatar: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
   },
   form: {
     width: '100%', // Fix IE11 issue.
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
   },
   checkbox: {
     margin: 0,
   },
   submit: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
   },
   container: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   label: {
     marginRight: 0,

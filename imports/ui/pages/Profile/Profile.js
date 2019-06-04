@@ -21,7 +21,7 @@ import showAlert from '../../components/Alert';
 const styles = theme => ({
   layout: layout(theme),
   button: {
-    margin: theme.spacing.unit * 3,
+    margin: theme.spacing(3),
   },
   input: {
     display: 'none',

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -9,38 +9,31 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
+/* eslint-disable-next-line react/display-name */
+const Transition = React.forwardRef((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
 
 function Alert({ title, message }) {
   const [open, setOpen] = useState(true);
-  useEffect(() => {
-    //
-    // same as: componentDidMount(), componentDidUpdate()
-    //
-    return function cleanUp() {
-      // same as: componentWillUnmount
-      setOpen(false);
-    };
-    // effect dependency array
-  }, [open]); // Only re-run the effect if variable changes
 
-  const handleClose = () => setOpen(false);
+  function handleClose() {
+    setOpen(false);
+  }
 
   return (
     <div>
       <Dialog
         open={open}
+        onClose={handleClose}
         TransitionComponent={Transition}
         keepMounted={false}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText id="alert-dialog-description">
             {message}
           </DialogContentText>
         </DialogContent>

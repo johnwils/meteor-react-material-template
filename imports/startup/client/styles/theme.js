@@ -5,9 +5,6 @@ import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
   palette: {
     type: 'light',
     primary: blue,
@@ -16,9 +13,7 @@ const theme = createMuiTheme({
   status: {
     danger: 'orange',
   },
-  spacing: {
-    unit: 8,
-  },
+  spacing: 8,
   shape: {
     borderRadius: 4,
   },
