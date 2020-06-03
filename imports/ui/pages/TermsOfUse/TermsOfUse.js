@@ -20,7 +20,7 @@ const styles = (theme) => ({
   },
 });
 
-function TermsOfUse({ classes }) {
+const TermsOfUse = ({ classes }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });

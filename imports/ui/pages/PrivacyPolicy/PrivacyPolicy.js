@@ -12,7 +12,7 @@ const styles = (theme) => ({
   },
 });
 
-function PrivacyPolicy({ classes }) {
+const PrivacyPolicy = ({ classes }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
