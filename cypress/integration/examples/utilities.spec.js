@@ -7,11 +7,8 @@ context('Utilities', () => {
 
   it('Cypress._ - call a lodash method', () => {
     // https://on.cypress.io/_
-    cy.request('https://jsonplaceholder.cypress.io/users').then(response => {
-      let ids = Cypress._.chain(response.body)
-        .map('id')
-        .take(3)
-        .value();
+    cy.request('https://jsonplaceholder.cypress.io/users').then((response) => {
+      let ids = Cypress._.chain(response.body).map('id').take(3).value();
 
       expect(ids).to.deep.eq([1, 2, 3]);
     });
@@ -29,14 +26,14 @@ context('Utilities', () => {
 
   it('Cypress.Blob - blob utilities and base64 string conversion', () => {
     // https://on.cypress.io/blob
-    cy.get('.utility-blob').then($div =>
+    cy.get('.utility-blob').then(($div) =>
       // https://github.com/nolanlawson/blob-util#imgSrcToDataURL
       // get the dataUrl string for the javascript-logo
       Cypress.Blob.imgSrcToDataURL(
         'https://example.cypress.io/assets/img/javascript-logo.png',
         undefined,
         'anonymous'
-      ).then(dataUrl => {
+      ).then((dataUrl) => {
         // create an <img> element and set its src to the dataUrl
         let img = Cypress.$('<img />', { src: dataUrl });
         // need to explicitly return cy here since we are initially returning
@@ -44,9 +41,7 @@ context('Utilities', () => {
         // append the image
         $div.append(img);
 
-        cy.get('.utility-blob img')
-          .click()
-          .should('have.attr', 'src', dataUrl);
+        cy.get('.utility-blob img').click().should('have.attr', 'src', dataUrl);
       })
     );
   });
@@ -84,9 +79,7 @@ context('Utilities', () => {
       .format('h:mm A');
     expect(time).to.be.a('string');
 
-    cy.get('.utility-moment')
-      .contains('3:38 PM')
-      .should('have.class', 'badge');
+    cy.get('.utility-moment').contains('3:38 PM').should('have.class', 'badge');
   });
 
   it('Cypress.Promise - instantiate a bluebird promise', () => {
@@ -114,7 +107,7 @@ context('Utilities', () => {
       // return a promise to cy.then() that
       // is awaited until it resolves
       // @ts-ignore TS7006
-      waitOneSecond().then(str => {
+      waitOneSecond().then((str) => {
         expect(str).to.eq('foo');
         expect(waited).to.be.true;
       })

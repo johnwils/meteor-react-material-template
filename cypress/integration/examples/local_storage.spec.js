@@ -19,7 +19,7 @@ context('Local Storage', () => {
       });
 
     // clearLocalStorage() yields the localStorage object
-    cy.clearLocalStorage().should(ls => {
+    cy.clearLocalStorage().should((ls) => {
       expect(ls.getItem('prop1')).to.be.null;
       expect(ls.getItem('prop2')).to.be.null;
       expect(ls.getItem('prop3')).to.be.null;
@@ -34,7 +34,7 @@ context('Local Storage', () => {
         expect(localStorage.getItem('prop3')).to.eq('magenta');
       });
 
-    cy.clearLocalStorage('prop1').should(ls => {
+    cy.clearLocalStorage('prop1').should((ls) => {
       expect(ls.getItem('prop1')).to.be.null;
       expect(ls.getItem('prop2')).to.eq('blue');
       expect(ls.getItem('prop3')).to.eq('magenta');
@@ -49,7 +49,7 @@ context('Local Storage', () => {
         expect(localStorage.getItem('prop3')).to.eq('magenta');
       });
 
-    cy.clearLocalStorage(/prop1|2/).should(ls => {
+    cy.clearLocalStorage(/prop1|2/).should((ls) => {
       expect(ls.getItem('prop1')).to.be.null;
       expect(ls.getItem('prop2')).to.be.null;
       expect(ls.getItem('prop3')).to.eq('magenta');

@@ -45,7 +45,7 @@ context('Connectors', () => {
 
   it('.then() - invoke a callback function with the current subject', () => {
     // https://on.cypress.io/then
-    cy.get('.connectors-list>li').then($lis => {
+    cy.get('.connectors-list>li').then(($lis) => {
       expect($lis).to.have.length(3);
       expect($lis.eq(0)).to.contain('Walk the dog');
       expect($lis.eq(1)).to.contain('Feed the cat');

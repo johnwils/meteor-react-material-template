@@ -66,7 +66,7 @@ context('Assertions', () => {
       // automatically until it passes all your explicit assertions or times out.
       cy.get('.assertions-p')
         .find('p')
-        .should($p => {
+        .should(($p) => {
           // https://on.cypress.io/$
           // return an array of texts from all of the p's
           // @ts-ignore TS6133 unused variable
@@ -92,7 +92,7 @@ context('Assertions', () => {
       cy.get('.docs-header')
         .find('div')
         // .should(cb) callback function will be retried
-        .should($div => {
+        .should(($div) => {
           expect($div).to.have.length(1);
 
           const className = $div[0].className;
@@ -101,7 +101,7 @@ context('Assertions', () => {
         })
         // .then(cb) callback is not retried,
         // it either passes or fails
-        .then($div => {
+        .then(($div) => {
           expect($div).to.have.text('Introduction');
         });
     });
@@ -109,7 +109,7 @@ context('Assertions', () => {
     it('can throw any error', () => {
       cy.get('.docs-header')
         .find('div')
-        .should($div => {
+        .should(($div) => {
           if ($div.length !== 1) {
             // you can throw your own errors
             throw new Error('Did not find 1 element');

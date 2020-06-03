@@ -10,7 +10,7 @@ context('Network Requests', () => {
   it('cy.server() - control behavior of network requests and responses', () => {
     // https://on.cypress.io/server
 
-    cy.server().should(server => {
+    cy.server().should((server) => {
       // the default options on server
       // you can override any of these options
       expect(server.delay).to.eq(0);
@@ -48,7 +48,7 @@ context('Network Requests', () => {
   it('cy.request() - make an XHR request', () => {
     // https://on.cypress.io/request
     cy.request('https://jsonplaceholder.cypress.io/comments').should(
-      response => {
+      (response) => {
         expect(response.status).to.eq(200);
         expect(response.body).to.have.length(500);
         expect(response).to.have.property('headers');
@@ -58,16 +58,14 @@ context('Network Requests', () => {
   });
 
   it('cy.request() - verify response using BDD syntax', () => {
-    cy.request('https://jsonplaceholder.cypress.io/comments').then(response => {
-      // https://on.cypress.io/assertions
-      expect(response)
-        .property('status')
-        .to.equal(200);
-      expect(response)
-        .property('body')
-        .to.have.length(500);
-      expect(response).to.include.keys('headers', 'duration');
-    });
+    cy.request('https://jsonplaceholder.cypress.io/comments').then(
+      (response) => {
+        // https://on.cypress.io/assertions
+        expect(response).property('status').to.equal(200);
+        expect(response).property('body').to.have.length(500);
+        expect(response).to.include.keys('headers', 'duration');
+      }
+    );
   });
 
   it('cy.request() with query parameters', () => {
@@ -104,9 +102,7 @@ context('Network Requests', () => {
     cy.get('.network-btn').click();
 
     // https://on.cypress.io/wait
-    cy.wait('@getComment')
-      .its('status')
-      .should('eq', 200);
+    cy.wait('@getComment').its('status').should('eq', 200);
 
     // Listen to POST to comments
     cy.route('POST', '/comments').as('postComment');
@@ -117,7 +113,7 @@ context('Network Requests', () => {
     cy.wait('@postComment');
 
     // get the route
-    cy.get('@postComment').should(xhr => {
+    cy.get('@postComment').should((xhr) => {
       expect(xhr.requestBody).to.include('email');
       expect(xhr.requestHeaders).to.have.property('Content-Type');
       expect(xhr.responseBody).to.have.property(
