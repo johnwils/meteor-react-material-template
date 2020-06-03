@@ -11,8 +11,8 @@ import Counters from './counters.js';
 import './publications.js';
 
 if (Meteor.isServer) {
-  describe('counters publications', function() {
-    before(function() {
+  describe('counters publications', function () {
+    before(function () {
       Counters.remove({});
       _.times(7, () => {
         Counters.insert({
@@ -22,8 +22,8 @@ if (Meteor.isServer) {
       });
     });
 
-    describe('counters.all', function() {
-      it('sends all counters', function(done) {
+    describe('counters.all', function () {
+      it('sends all counters', function (done) {
         const collector = new PublicationCollector();
         collector.collect('counters.all', () => {
           assert.notEqual(Counters.find().count(), 6);

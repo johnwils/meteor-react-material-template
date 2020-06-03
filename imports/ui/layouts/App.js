@@ -28,7 +28,7 @@ import Spinner from '../components/Spinner';
 import PropsRoute from '../pages/PropsRoute';
 import Footer from '../components/Footer/index';
 
-const App = props => (
+const App = (props) => (
   <Router>
     <div
       style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}

@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { websiteName, websiteUrl } from '../../../startup/client/lib/constants';
 
 // eslint-disable-next-line
-const styles = theme => ({
+const styles = (theme) => ({
   layout: {
     padding: '0 25px',
   },

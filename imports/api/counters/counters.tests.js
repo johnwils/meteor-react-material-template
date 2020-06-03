@@ -7,8 +7,8 @@ import { assert } from 'chai';
 import Counters from './counters.js';
 
 if (Meteor.isServer) {
-  describe('counters collection', function() {
-    it('inserts correctly', function() {
+  describe('counters collection', function () {
+    it('inserts correctly', function () {
       const counterId = Counters.insert({
         _id: this.userId,
         count: 0,

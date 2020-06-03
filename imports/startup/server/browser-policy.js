@@ -11,7 +11,7 @@ import { BrowserPolicy } from 'meteor/browser-policy-common';
  * allowed images
  */
 const allowImageOrigin = ['via.placeholder.com'];
-allowImageOrigin.forEach(o => BrowserPolicy.content.allowImageOrigin(o));
+allowImageOrigin.forEach((o) => BrowserPolicy.content.allowImageOrigin(o));
 
 /**
  * allowed scripts
@@ -23,10 +23,10 @@ allowImageOrigin.forEach(o => BrowserPolicy.content.allowImageOrigin(o));
  * allowed styles
  */
 const allowStyleOrigin = ['fonts.googleapis.com'];
-allowStyleOrigin.forEach(o => BrowserPolicy.content.allowStyleOrigin(o));
+allowStyleOrigin.forEach((o) => BrowserPolicy.content.allowStyleOrigin(o));
 
 /**
  * allowed fonts
  */
 const allowFontOrigin = ['fonts.gstatic.com'];
-allowFontOrigin.forEach(o => BrowserPolicy.content.allowFontOrigin(o));
+allowFontOrigin.forEach((o) => BrowserPolicy.content.allowFontOrigin(o));

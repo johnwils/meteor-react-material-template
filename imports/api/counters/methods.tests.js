@@ -8,8 +8,8 @@ import Counters from './counters.js';
 import { countersInsert, countersIncrease } from './methods.js';
 
 if (Meteor.isServer) {
-  describe('counters method', function() {
-    before(function() {
+  describe('counters method', function () {
+    before(function () {
       Counters.remove({});
       Meteor.users.remove({});
     });
@@ -17,7 +17,7 @@ if (Meteor.isServer) {
     // use same counter id for all tests
     let counterId = null;
 
-    it('can add a counter', async function(done) {
+    it('can add a counter', async function (done) {
       assert.equal(Counters.find().count(), 0);
       countersInsert.call((err, result) => {
         if (err) {
@@ -30,7 +30,7 @@ if (Meteor.isServer) {
       });
     });
 
-    it('can increase a counter', async function() {
+    it('can increase a counter', async function () {
       assert.equal(Counters.findOne(counterId).count, 0);
       // create user and assign to 'user' role
       const stubbedUserId = Accounts.createUser({
@@ -45,7 +45,7 @@ if (Meteor.isServer) {
       assert.equal(Counters.findOne(counterId).count, 1);
     });
 
-    it('cannot increase a counter if not in "user" role', async function() {
+    it('cannot increase a counter if not in "user" role', async function () {
       const counter = Counters.findOne(counterId);
       // should still be 1 from previous test
       assert.equal(counter.count, 1);

@@ -31,7 +31,7 @@ function SignUp({ loggedIn, history, classes }) {
     }
   }, [loggedIn]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!checkbox) {
       return showAlert({
@@ -39,7 +39,7 @@ function SignUp({ loggedIn, history, classes }) {
         message: 'Please agree to the Terms of Use',
       });
     }
-    Accounts.createUser({ email, password }, err => {
+    Accounts.createUser({ email, password }, (err) => {
       if (err) {
         showAlert({ title: 'Sign Up Error', message: err.reason });
         return console.log(err);
@@ -65,7 +65,7 @@ function SignUp({ loggedIn, history, classes }) {
                 autoComplete="email"
                 autoFocus={false}
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -76,7 +76,7 @@ function SignUp({ loggedIn, history, classes }) {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
             <FormControlLabel

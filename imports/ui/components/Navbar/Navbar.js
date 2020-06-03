@@ -26,7 +26,7 @@ const styles = {
 
 function NavBar({ classes, loggedIn, history }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const handleMenu = e => setAnchorEl(e.currentTarget);
+  const handleMenu = (e) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const open = Boolean(anchorEl);

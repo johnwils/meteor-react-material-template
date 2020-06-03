@@ -16,7 +16,7 @@ import Sending from '../../components/Sending';
 // global layout
 import layout from '../../styles/Layout';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: layout(theme),
   title: {
     marginBottom: 8,
@@ -42,7 +42,7 @@ function ResetPassword({ match, history, classes }) {
       });
     }
     setSending(true);
-    Accounts.resetPassword(match.params.token, password, err => {
+    Accounts.resetPassword(match.params.token, password, (err) => {
       setSending(false);
       setPassword('false');
       if (err) {
@@ -76,7 +76,7 @@ function ResetPassword({ match, history, classes }) {
           name="password"
           autoFocus
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </FormControl>
       <Button

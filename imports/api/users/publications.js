@@ -5,7 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 if (Meteor.isServer) {
   // all users publication (admin only)
-  Meteor.publish('users.all', function() {
+  Meteor.publish('users.all', function () {
     if (Roles.userIsInRole(this.userId, 'admin')) {
       return Meteor.users.find();
     }
@@ -13,7 +13,7 @@ if (Meteor.isServer) {
   });
 
   // current logged in user publication
-  Meteor.publish('user', function() {
+  Meteor.publish('user', function () {
     if (this.userId) {
       return Meteor.users.find(
         { _id: this.userId },

@@ -16,7 +16,7 @@ import Sending from '../../components/Sending';
 // global layout
 import layout from '../../styles/Layout';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: layout(theme),
   title: {
     marginBottom: 8,
@@ -42,7 +42,7 @@ function RecoverPassword({ classes }) {
       });
     }
     setSending(true);
-    Accounts.forgotPassword({ email }, err => {
+    Accounts.forgotPassword({ email }, (err) => {
       setSending(false);
       setEmail('');
       if (err) {
@@ -75,7 +75,7 @@ function RecoverPassword({ classes }) {
           name="email"
           autoFocus
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
       <Button

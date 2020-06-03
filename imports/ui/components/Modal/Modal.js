@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Slide from '@material-ui/core/Slide';
 
-const styles = theme => ({
+const styles = (theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',

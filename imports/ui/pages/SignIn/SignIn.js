@@ -35,9 +35,9 @@ function SignIn({ loggedIn, history, classes }) {
     }
   }, [loggedIn, checkbox]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    Meteor.loginWithPassword(email, password, err => {
+    Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
         showAlert({ title: 'Sign in Error', message: err.reason });
         return console.log(err);
@@ -63,7 +63,7 @@ function SignIn({ loggedIn, history, classes }) {
                 autoComplete="email"
                 autoFocus
                 value={email}
-                onChange={e => {
+                onChange={(e) => {
                   setEmail(e.target.value);
                   if (checkbox) {
                     localStorage.setItem('email', email);
@@ -79,7 +79,7 @@ function SignIn({ loggedIn, history, classes }) {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
             <Grid

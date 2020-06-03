@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 
 // eslint-disable-next-line
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'center',
     padding: '16px 0',

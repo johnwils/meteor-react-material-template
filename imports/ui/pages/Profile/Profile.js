@@ -18,7 +18,7 @@ import layout from '../../styles/Layout';
 // components
 import showAlert from '../../components/Alert';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: layout(theme),
   button: {
     margin: theme.spacing(3),

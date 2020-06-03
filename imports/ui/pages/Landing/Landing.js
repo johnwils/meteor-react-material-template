@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import layout from '../../styles/Layout';
 
-const styles = theme => ({
+const styles = (theme) => ({
   layout: layout(theme),
 });
 
