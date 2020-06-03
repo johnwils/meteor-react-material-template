@@ -651,7 +651,7 @@ const TermsOfUse = ({ classes }) => {
       <p>Email: {supportEmail}</p>
     </div>
   );
-}
+};
 
 TermsOfUse.propTypes = {
   classes: PropTypes.object.isRequired,

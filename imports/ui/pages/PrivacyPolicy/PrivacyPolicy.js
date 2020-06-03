@@ -156,7 +156,7 @@ const PrivacyPolicy = ({ classes }) => {
       </p>
     </div>
   );
-}
+};
 
 PrivacyPolicy.propTypes = {
   classes: PropTypes.object.isRequired,
