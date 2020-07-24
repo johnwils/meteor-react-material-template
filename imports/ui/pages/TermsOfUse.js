@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 import { Link } from 'react-router-dom';
 
@@ -11,22 +10,20 @@ import {
   supportEmail,
   websiteName,
   websiteUrl,
-} from '../../../startup/client/lib/constants';
+} from '../../startup/client/lib/constants';
 
-// eslint-disable-next-line
-const styles = (theme) => ({
-  layout: {
-    padding: '0 25px',
-  },
-});
+// styles
+import useSharedDisclaimerStyles from '../styles/custom/useSharedDisclaimerStyles';
 
-const TermsOfUse = ({ classes }) => {
+const TermsOfUse = () => {
+  const sharedDisclaimerClasses = useSharedDisclaimerStyles();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 
   return (
-    <div className={classes.layout}>
+    <main className={sharedDisclaimerClasses.container}>
       <h2>{websiteName} Terms of Use</h2>
 
       <p>Version 1.0</p>
@@ -649,15 +646,14 @@ const TermsOfUse = ({ classes }) => {
 
       <p>Address: {companyAddress}</p>
       <p>Email: {supportEmail}</p>
-    </div>
+    </main>
   );
 };
 
 TermsOfUse.propTypes = {
-  classes: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default withStyles(styles)(TermsOfUse);
+export default TermsOfUse;

@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 // constants
-import { websiteName, websiteUrl } from '../../../startup/client/lib/constants';
+import { websiteName, websiteUrl } from '../../startup/client/lib/constants';
 
-// eslint-disable-next-line
-const styles = (theme) => ({
-  layout: {
-    padding: '0 25px',
-  },
-});
+// styles
+import useSharedDisclaimerStyles from '../styles/custom/useSharedDisclaimerStyles';
 
-const PrivacyPolicy = ({ classes }) => {
+const PrivacyPolicy = () => {
+  const sharedDisclaimerClasses = useSharedDisclaimerStyles();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 
   return (
-    <div className={classes.layout}>
+    <main className={sharedDisclaimerClasses.container}>
       <h2>
         Privacy Policy of <span className="website_url">{websiteUrl}</span>
       </h2>
@@ -154,15 +151,14 @@ const PrivacyPolicy = ({ classes }) => {
         will notify you by posting an announcement on the Website or sending you
         an email.
       </p>
-    </div>
+    </main>
   );
 };
 
 PrivacyPolicy.propTypes = {
-  classes: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default withStyles(styles)(PrivacyPolicy);
+export default PrivacyPolicy;

@@ -1,10 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 
-import './styles/main.scss';
 import theme from './styles/theme';
 
 // import client routes

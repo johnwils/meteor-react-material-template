@@ -1,20 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 
 // eslint-disable-next-line
-const styles = (theme) => ({
-  root: {
+const useStyles = makeStyles((theme) => ({
+  container: {
     textAlign: 'center',
-    padding: '16px 0',
+    padding: 0,
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
   },
-});
+}));
 
-const Footer = ({ classes }) => {
+const Footer = () => {
+  const classes = useStyles();
+
   return (
-    <div className={classes.root}>
+    <div className={classes.container}>
       <Grid container>
         <Grid item xs>
           <Link to="/terms-of-use">Terms of use</Link>
@@ -27,8 +29,4 @@ const Footer = ({ classes }) => {
   );
 };
 
-Footer.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Footer);
+export default Footer;

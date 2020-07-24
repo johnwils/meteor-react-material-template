@@ -1,38 +1,43 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Typography,
+  IconButton,
+  MenuItem,
+  Menu,
+  makeStyles,
+} from '@material-ui/core';
 
-const styles = {
-  root: {
+const useStyles = makeStyles((theme) => ({
+  container: {
     flexGrow: 1,
   },
   grow: {
     flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft: `-${theme.spacing(2)}px`,
+    marginRight: theme.spacing(3),
   },
-};
+}));
 
-function NavBar({ classes, loggedIn, history }) {
+const NavBar = ({ loggedIn, history }) => {
+  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = useState(null);
+
   const handleMenu = (e) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const open = Boolean(anchorEl);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.container}>
       <AppBar position="static">
         <Toolbar>
           {/* <IconButton
@@ -55,7 +60,7 @@ function NavBar({ classes, loggedIn, history }) {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountCircleIcon />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -112,14 +117,13 @@ function NavBar({ classes, loggedIn, history }) {
       </AppBar>
     </div>
   );
-}
+};
 
 NavBar.propTypes = {
-  classes: PropTypes.object.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default withStyles(styles)(NavBar);
+export default NavBar;

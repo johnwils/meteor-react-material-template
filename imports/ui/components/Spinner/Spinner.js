@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core';
 
-const styles = {
+const useStyles = makeStyles({
   container: {
     position: 'fixed',
     display: 'flex',
@@ -17,18 +16,18 @@ const styles = {
   icon: {
     fontSize: '44px',
   },
-};
+});
 
-const Spinner = ({ classes }) => (
-  <div className={classes.container}>
-    <div className={classes.icon}>
-      <i className="fa fa-circle-o-notch fa-spin" />
+const Spinner = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.container}>
+      <div className={classes.icon}>
+        <i className="fa fa-circle-o-notch fa-spin" />
+      </div>
     </div>
-  </div>
-);
-
-Spinner.propTypes = {
-  classes: PropTypes.object.isRequired,
+  );
 };
 
-export default withStyles(styles)(Spinner);
+export default Spinner;

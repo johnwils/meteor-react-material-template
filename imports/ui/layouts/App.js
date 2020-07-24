@@ -2,7 +2,7 @@
 
 // import packages
 import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
+import { useTracker } from 'meteor/react-meteor-data';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -28,64 +28,73 @@ import Spinner from '../components/Spinner';
 import PropsRoute from '../pages/PropsRoute';
 import Footer from '../components/Footer/index';
 
-const App = (props) => (
-  <Router>
-    <div
-      style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}
-    >
-      <PropsRoute component={Navbar} {...props} />
-      <div style={{ flex: 1 }}>
-        {props.loggingIn && <Spinner />}
-        <Switch>
-          <PropsRoute exact path="/" component={Landing} {...props} />
-          <PropsRoute path="/signin" component={SignIn} {...props} />
-          <PropsRoute path="/signup" component={SignUp} {...props} />
-          <PropsRoute exact path="/profile" component={Profile} {...props} />
-          <PropsRoute
-            exact
-            path="/profile/:_id"
-            component={Profile}
-            {...props}
-          />
-          <PropsRoute
-            path="/recover-password"
-            component={RecoverPassword}
-            {...props}
-          />
-          <PropsRoute
-            path="/reset-password/:token"
-            component={ResetPassword}
-            {...props}
-          />
-          <PropsRoute path="/terms-of-use" component={TermsOfUse} {...props} />
-          <PropsRoute
-            path="/privacy-policy"
-            component={PrivacyPolicy}
-            {...props}
-          />
-          <PropsRoute component={NotFound} {...props} />
-        </Switch>
-      </div>
-      <PropsRoute component={Footer} {...props} />
-    </div>
-  </Router>
-);
+const App = () => {
+  const values = useTracker(() => {
+    const userSub = Meteor.subscribe('user');
+    const user = Meteor.user();
+    const userReady = userSub.ready() && !!user;
+    const loggingIn = Meteor.loggingIn();
+    const loggedIn = !loggingIn && userReady;
 
-App.propTypes = {
-  loggingIn: PropTypes.bool.isRequired,
-  userReady: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
+    return {
+      loggingIn,
+      userReady,
+      loggedIn,
+    };
+  }, []);
+
+  return (
+    <Router>
+      <div
+        style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}
+      >
+        <PropsRoute component={Navbar} {...values} />
+        <div style={{ flex: 1 }}>
+          {values.loggingIn && <Spinner />}
+          <Switch>
+            <PropsRoute exact path="/" component={Landing} {...values} />
+            <PropsRoute path="/signin" component={SignIn} {...values} />
+            <PropsRoute path="/signup" component={SignUp} {...values} />
+            <PropsRoute exact path="/profile" component={Profile} {...values} />
+            <PropsRoute
+              exact
+              path="/profile/:_id"
+              component={Profile}
+              {...values}
+            />
+            <PropsRoute
+              path="/recover-password"
+              component={RecoverPassword}
+              {...values}
+            />
+            <PropsRoute
+              path="/reset-password/:token"
+              component={ResetPassword}
+              {...values}
+            />
+            <PropsRoute
+              path="/terms-of-use"
+              component={TermsOfUse}
+              {...values}
+            />
+            <PropsRoute
+              path="/privacy-policy"
+              component={PrivacyPolicy}
+              {...values}
+            />
+            <PropsRoute component={NotFound} {...values} />
+          </Switch>
+        </div>
+        <PropsRoute component={Footer} {...values} />
+      </div>
+    </Router>
+  );
 };
 
-export default withTracker(() => {
-  const userSub = Meteor.subscribe('user');
-  const user = Meteor.user();
-  const userReady = userSub.ready() && !!user;
-  const loggingIn = Meteor.loggingIn();
-  const loggedIn = !loggingIn && userReady;
-  return {
-    loggingIn,
-    userReady,
-    loggedIn,
-  };
-})(App);
+// App.propTypes = {
+//   loggingIn: PropTypes.bool.isRequired,
+//   userReady: PropTypes.bool.isRequired,
+//   loggedIn: PropTypes.bool.isRequired,
+// };
+
+export default App;

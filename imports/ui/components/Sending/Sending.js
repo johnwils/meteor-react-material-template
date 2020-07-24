@@ -1,15 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { Grid, Typography, makeStyles } from '@material-ui/core';
 
-const styles = () => ({
+const useStyles = makeStyles((theme) => ({
   title: {
-    marginBottom: 8,
+    marginBottom: theme.spacing(1),
   },
-});
-function Sending({ classes }) {
+}));
+
+const Sending = () => {
+  const classes = useStyles();
+
   return (
     <Grid container direction="column" alignItems="center">
       <Typography className={classes.title} variant="h5">
@@ -17,10 +17,6 @@ function Sending({ classes }) {
       </Typography>
     </Grid>
   );
-}
-
-Sending.propTypes = {
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Sending);
+export default Sending;

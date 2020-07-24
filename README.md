@@ -1,6 +1,6 @@
 [![eslint: airbnb](https://img.shields.io/badge/eslint-airbnb-blue.svg)](https://github.com/airbnb/javascript)
 [![prettier](https://img.shields.io/badge/-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-## A Meteor 1.8, React 16, React Router 5, Material UI 4 template
+## A Meteor 1.10, React 16, React Router 5, Material UI 4 template
 
 Based off the official meteor scaffolding, with accounts and a demo collection that persists on signin/signout.
 
@@ -34,9 +34,7 @@ Navigate to [http://localhost:3000](http://localhost:3000) in any browser.
 
 
 ## Routing and redirects
-React Router 5 `props` are accessible in every top level 'page' component. This allows any page to access react router's 'redirect' functions and url params, etc. These can be passed onto any further components.
-
-Also React Router's `withProps` HOC provides the same functionality to any component.
+React Router 5 `props` are accessible in every top level 'page' component. This allows any page to access react router's 'redirect' functions and url params, etc. These values can be passed onto any further components or React Router hooks can be used.
 
 ## Folder structure
 
@@ -48,7 +46,7 @@ Each 'route' is represented by a folder in the 'pages' directory. Most data fetc
 ### Components
 Reusable components in the 'components' directory are 'dumb' or ''presentational' components. These are mostly functional, stateless components. If a component requires data, it is passed as props from it's page component.
 
-*Note:* Meteor's reactive `withTracker` can also fetch data in any sub component (if really needed).
+*Note:* The Meteor `useTracker` hook can also fetch data in any sub component (if needed).
 
 ### Styling
 

@@ -30,8 +30,8 @@ tunifight:loggedin-mixin
 
 johanbrook:publication-collector
 react-meteor-data
-mizzao:user-status
 alanning:roles
 meteortesting:mocha
 matb33:collection-hooks
 lacosta:method-hooks
+mizzao:user-status
