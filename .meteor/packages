@@ -11,7 +11,6 @@ static-html                       # Define static page content in .html files
 reactive-var@1.0.11               # Reactive variable for tracker
 tracker@1.2.0                     # Meteor's client-side reactive programming library
 session@1.2.0
-react-meteor-data
 accounts-password@1.6.0
 
 standard-minifier-js@2.6.0
@@ -25,14 +24,14 @@ fortawesome:fontawesome
 
 browser-policy@1.1.0
 aldeed:collection2@3.0.0
-matb33:collection-hooks
-msavin:mongol
-alanning:roles
-mizzao:user-status
 mdg:validated-method
 didericis:callpromise-mixin
-lacosta:method-hooks
 tunifight:loggedin-mixin
 
 johanbrook:publication-collector
+react-meteor-data
+mizzao:user-status
+alanning:roles
 meteortesting:mocha
+matb33:collection-hooks
+lacosta:method-hooks

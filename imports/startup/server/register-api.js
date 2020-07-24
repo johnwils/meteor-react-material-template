@@ -7,6 +7,9 @@
 import '../../api/users/publications.js';
 import '../../api/users/hooks.js';
 
+// roles api
+import '../../api/roles/publications.js';
+
 // counters api (example)
 import '../../api/counters/methods.js';
 import '../../api/counters/publications.js';
