@@ -20,7 +20,7 @@
   ],
   "jest": {
     "setupFilesAfterEnv": [
-      "./tests/enzyme-config.js"
+      "./tests/utils.js"
     ],
     "moduleNameMapper": {
       "^.+\\.(css|less|scss)$": "babel-jest"
@@ -50,14 +50,13 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@meteorjs/eslint-config-meteor": "^1.0.5",
+    "@testing-library/react": "^10.4.7",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.1.0",
     "canvas": "^2.6.1",
     "chai": "^4.2.0",
     "chromedriver": "^84.0.1",
     "cypress": "^4.11.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^7.5.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",

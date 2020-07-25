@@ -16,7 +16,7 @@ const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-function Alert({ title, message }) {
+const Alert = ({ title, message }) => {
   const [open, setOpen] = useState(true);
 
   function handleClose() {
@@ -47,7 +47,7 @@ function Alert({ title, message }) {
       </Dialog>
     </div>
   );
-}
+};
 
 Alert.propTypes = {
   title: PropTypes.string.isRequired,
