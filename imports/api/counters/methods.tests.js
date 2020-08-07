@@ -7,11 +7,14 @@ import { assert } from 'chai';
 import Counters from './counters.js';
 import { countersInsert, countersIncrease } from './methods.js';
 
+import { createRoles } from '../../startup/server/roles';
+
 if (Meteor.isServer) {
   describe('counters method', function () {
     before(function () {
       Counters.remove({});
       Meteor.users.remove({});
+      createRoles();
     });
 
     // use same counter id for all tests
@@ -54,6 +57,9 @@ if (Meteor.isServer) {
         email: 'not@in.com',
         password: 'user-role',
       });
+
+      Roles.removeUsersFromRoles(stubbedUserId, 'user');
+
       assert.throws(
         () =>
           countersIncrease.run.call(

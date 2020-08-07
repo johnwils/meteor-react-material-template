@@ -1,6 +1,7 @@
 {
-  "fixturesFolder": "tests/cypress/fixtures",
-  "integrationFolder": "tests/cypress/integration",
-  "pluginsFolder": "tests/cypress/plugins",
-  "supportFile": "tests/cypress/support"
+  "fixturesFolder": "tests/cypress/fixtures/",
+  "integrationFolder": "tests/cypress/integration/",
+  "pluginsFolder": "tests/cypress/plugins/",
+  "supportFile": "tests/cypress/support/",
+  "ignoreTestFiles": "**/examples/*.spec.js"
 }

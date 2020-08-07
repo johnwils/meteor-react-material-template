@@ -4,7 +4,6 @@
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // import navbar
@@ -90,11 +89,5 @@ const App = () => {
     </Router>
   );
 };
-
-// App.propTypes = {
-//   loggingIn: PropTypes.bool.isRequired,
-//   userReady: PropTypes.bool.isRequired,
-//   loggedIn: PropTypes.bool.isRequired,
-// };
 
 export default App;
