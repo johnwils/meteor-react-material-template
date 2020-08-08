@@ -15,15 +15,14 @@
     "clean": "rm -rf node_modules/ package-lock.json && meteor npm i"
   },
   "pre-commit": [
-    "lint",
-    "prettier"
+    "lint"
   ],
   "jest": {
     "moduleNameMapper": {
       "^.+\\.(css|less|scss)$": "babel-jest"
     },
     "testPathIgnorePatterns": [
-      "./cypress/"
+      "./tests/e2e/cypress/"
     ]
   },
   "dependencies": {

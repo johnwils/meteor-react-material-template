@@ -1,7 +1,10 @@
 {
-  "fixturesFolder": "tests/cypress/fixtures/",
-  "integrationFolder": "tests/cypress/integration/",
-  "pluginsFolder": "tests/cypress/plugins/",
-  "supportFile": "tests/cypress/support/",
+  "fileServerFolder": "./tests/e2e/cypress",
+  "fixturesFolder": "./tests/e2e/cypress/fixtures/",
+  "integrationFolder": "./tests/e2e/cypress/integration/",
+  "screenshotsFolder": "./tests/e2e/cypress/screenshots",
+  "supportFile": "./tests/e2e/cypress/support/index.js",
+  "videosFolder": "./tests/e2e/cypress/videos",
+  "pluginsFile": "./tests/e2e/cypress/plugins/",
   "ignoreTestFiles": "**/examples/*.spec.js"
 }
