@@ -38,8 +38,14 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Install packages
+    - name: Install Packages
       run: meteor npm install
-        
-    - name: Run tests
-      run: meteor npm run test:ci
+
+    - name: Unit Tests
+      run: meteor npm run test:unit
+
+    - name: Server Tests
+      run: meteor npm run test:server
+
+    - name: E2E Tests
+      run: meteor npm run test:e2e:ci

@@ -107,15 +107,16 @@ npm run test:e2e
 These tests appear live in-browser for debugging.
 
 ### CI
-GitHub Actions are used for continuous integration
+GitHub Actions are used for continuous integration testing.
 
-To run CI tests:
+Unit tests, server tests and headless E2E tests are run each time code is pushed or pull request is opened.
 
+Unit tests
 ```
-npm run test:ci
+npm run test:unit
+npm run test:server
+npm run test:e2e:headless
 ```
-
-These tests run unit, server and e2e tests in headless mode.
 
 ## ESLint
 
