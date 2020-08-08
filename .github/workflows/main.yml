@@ -22,9 +22,6 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Install Meteor
-      run: curl https://install.meteor.com/ | sh
-
     - name: Cache node modules
       uses: actions/cache@v2
       env:
@@ -38,14 +35,17 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Install Packages
+    - name: Install Meteor
+      run: curl https://install.meteor.com/ | sh
+
+    - name: Install packages
       run: meteor npm install
 
-    - name: Unit Tests
+    - name: Unit tests
       run: meteor npm run test:unit
 
-    - name: Server Tests
+    - name: Server tests
       run: meteor npm run test:server
 
-    - name: E2E Tests
-      run: meteor npm run test:e2e:ci
+    - name: E2E tests
+      run: meteor npm run test:e2e:headless
