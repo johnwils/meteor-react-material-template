@@ -8,9 +8,10 @@
     "cypress:open": "cypress open",
     "cypress:headless": "cypress run --config video=false",
     "test:e2e": "start-server-and-test start:e2e http://localhost:3050 cypress:open",
-    "test:e2e:ci": "start-server-and-test start:e2e http://localhost:3050 cypress:headless",
+    "test:e2e:headless": "start-server-and-test start:e2e http://localhost:3050 cypress:headless",
     "test:unit": "NODE_ENV=UNIT_TESTING jest",
     "test:server": "TEST_CLIENT=0 meteor test --once --driver-package meteortesting:mocha",
+    "test:ci": "start-server-and-test start:e2e http://localhost:3050 && npm run test:unit && npm run test:server && npm run test:e2e:headless",
     "prettier": "prettier --write \"client/**/*.js\" \"imports/**/*.js\" \"server/**/*.js\" \"cypress/**/*.js\" --single-quote true",
     "clean": "rm -rf node_modules/ package-lock.json && meteor npm i"
   },

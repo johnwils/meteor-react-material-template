@@ -107,15 +107,15 @@ npm run test:e2e
 These tests appear live in-browser for debugging.
 
 ### CI
-CircleCI is used for continuous integration
+GitHub Actions are used for continuous integration
 
 To run CI tests:
 
 ```
-npm run test:e2e:ci
+npm run test:ci
 ```
 
-These tests run in headless mode.
+These tests run unit, server and e2e tests in headless mode.
 
 ## ESLint
 
@@ -138,36 +138,6 @@ The ddp connection enables access to the existing server's methods, collections 
 [Splitting into multiple Meteor apps](https://guide.meteor.com/structure.html#splitting-your-app)
 
 [Meteor multi app accounts](https://github.com/tmeasday/multi-app-accounts)
-
-<!-- **npm packages added**:
-
-- @babel/runtime (updated to work with latest meteor)
-- bcrypt
-- meteor-node-stubs
-- prop-types
-- react
-- react-dom
-- react-router-dom
-- autoprefixer
-- prettier
-- simpl-schema
-- recompose
-- jest
-
-**Meteor packages added**:
-
-- react-meteor-data       (provides HOCs to fetch data reactively from collections using `withTracker`)
-- accounts-password
-- alanning:roles
-- mdg:validated-method
-- aldeed:collection2@3.0.0
-- matb33:collection-hooks
-- msavin:mongol
-- fourseven:scss          (sass/css support in .scss files)
-- juliancwirko:postcss    (enables autoprefxer)
-- browser-policy          (restrict allowed origins for added security)
-- fortawesome:fontawesome (icons)
-- mizzao:user-status -->
 
 ## What is not included?
 There is no state management such as [Redux](https://github.com/reactjs/redux) or [MobX](https://github.com/mobxjs/mobx). This is partly because this template is so small and state is locally managed in components as needed. Also the Meteor collections reactively update the UI when changed. However, any state management tool can be easily added to the top level App component to provide a global store.
