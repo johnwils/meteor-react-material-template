@@ -47,5 +47,5 @@ jobs:
     - name: Server tests
       run: meteor npm run test:server
 
-    - name: E2E tests (headless)
+    - name: E2E tests
       run: meteor npm run test:e2e:headless
