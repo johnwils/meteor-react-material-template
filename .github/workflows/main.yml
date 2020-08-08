@@ -22,12 +22,14 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
+    # Install Meteor
     - name: Run a one-line script
       run: curl https://install.meteor.com/ | sh
 
-    # Runs a set of commands using the runners shell
+    # Install Packages
     - name: Run a multi-line script
-      run: |
-        meteor npm install,
-        meteor npm run test:unit
+      run: meteor npm install
+        
+    # Run Tests
+    - name: Run a multi-line script
+      run: meteor npm run test:unit
