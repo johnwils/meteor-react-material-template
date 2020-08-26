@@ -1,6 +1,6 @@
 [![eslint: airbnb](https://img.shields.io/badge/eslint-airbnb-blue.svg)](https://github.com/airbnb/javascript)
 [![prettier](https://img.shields.io/badge/-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-## A Meteor 1.10, React 16, React Router 5, Material UI 4 template
+## A Meteor 1.11, React 16, React Router 5, Material UI 4 template
 
 Based off the official meteor scaffolding, with accounts and a demo collection that persists on signin/signout.
 
@@ -19,7 +19,8 @@ Current routes setup:
 ## Quick start
 Clone repository:
 ```
-git clone git@gitlab.com:johnner/meteor-react-material-template.git
+git@github.com:johnwils/meteor-react-material-template.git (ssh)
+https://github.com/johnwils/meteor-react-material-template.git (https)
 ```
 Install packages:
 ```
@@ -120,7 +121,7 @@ To format files using prettier:
 npm run prettier
 ```
 
-This will update files in the 'imports', 'client' and 'server' folders using prettier style presets.
+This will update files in the 'imports', 'client', 'server' and 'tests' folders using prettier style presets.
 
 ## Connecting this template to an existing meteor backend
 A ddp connection can be made to an existing meteor server, following steps in [Meteor's official docs](https://docs.meteor.com/api/connections.html#DDP-connect)
